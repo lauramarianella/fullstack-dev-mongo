@@ -1,0 +1,42 @@
+/*http://clrs.cc/*/
+:root {
+  /* Combinations: #000, #fff,#868080*/
+  /* Combinations: #fff, #000,#868080*/
+  --bg-primary-color: #fff;
+  --font-primary-color: #000;
+  --font-hover-primary-color: #868080;
+
+  /* Combinations: #000, #fff*/
+  /* Combinations: #b10dc9, #fff*/
+  --bg-secondary-color: #000;
+  --font-secondary-color: #fff;
+
+  /* Combinations: #000, #fff, #333333, black, grey*/
+  /* Combinations: #b10dc9, #fff, #f012be, violeta, fucsia*/
+  /* Combinations: #0074d9, #fff, #7fdbff, blue, celeste*/
+  /* Combinations: gold, #fff, rgb(157, 187, 25), gold, green*/
+  --bg-tertiary-color: #000;
+  --font-tertiary-color: #fff;
+  --bg-hover-tertiary-color: #333333;
+
+  --links-color: #0074d9;
+
+  /* Combinations:#f2f4f7,#fff*/
+  --bg-content-color: #fff;
+  --bg-content-light-color: #fff;
+
+  --border-color: rgb(233, 231, 231);
+  --shadow-color: #fff; /*#888888*/
+
+  --border-radius-m: 6px;
+  --border-radius-s: 2px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'EngraversGothic BT', 'Courier New';
+}
