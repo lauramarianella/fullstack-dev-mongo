@@ -30,6 +30,23 @@ class App extends Component {
   constructor(props) {
     super(props);
   }
+  componentDidMount() {
+    this.isAlreadyLoggedIn();
+  }
+
+  isAlreadyLoggedIn = async () => {
+    let response = await fetch('/alreadyLoggedIn', {
+      method: 'GET',
+      credentials: 'include',
+    });
+    let responseBody = await response.text();
+    let body = JSON.parse(responseBody);
+    if (!body.success) {
+      // alert('NO Loged in');
+      return;
+    }
+    this.props.dispatch({ type: 'LOGIN-SUCCESS' });
+  };
 
   renderHome() {
     return; // <Home />;
@@ -46,7 +63,6 @@ class App extends Component {
   }
 
   render = () => {
-    console.log('app.jsx this.props.loggedIn ', this.props.loggedIn);
     if (this.props.loggedIn) {
       let componentToShow = <Items />;
       if (this.props.componentToShow === 'items') componentToShow = <Items />;

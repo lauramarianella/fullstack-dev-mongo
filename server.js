@@ -17,7 +17,7 @@ let dressers = data.dressers;
 let rates = data.rates;
 let cities = data.cities;
 
-let passwords = { Laura: 'Laura' };
+let passwords = { Laura: 'Rabah' };
 let sessions = {};
 
 app.use('/', express.static('build'));
@@ -33,6 +33,15 @@ app.get('/test', (req, res) => {
 let portNumber = 3000;
 app.listen(portNumber, () => {
   console.log('Server started in port ' + portNumber);
+});
+
+app.get('/alreadyLoggedIn', upload.none(), (req, res) => {
+  let sessionId = req.cookies.sid;
+  if (sessions[sessionId]) {
+    res.send(JSON.stringify({ success: true }));
+    return;
+  }
+  res.send(JSON.stringify({ success: false }));
 });
 
 app.post('/signup', upload.none(), (req, res) => {

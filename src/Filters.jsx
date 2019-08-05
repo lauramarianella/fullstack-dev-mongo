@@ -11,16 +11,29 @@ import {
   MydivError,
 } from './components';
 
-const Wrapper = styled.div`
+const FiltersWrapper = styled.div`
+  width: 250px;
   padding: 50px 20px;
-  background: yellow;
 `;
-const Myh1 = styled.div`
+
+const FilterWrapper = styled.div`
+  padding: 15px 0px;
+  border-top: 1px solid #999999;
+`;
+
+const WrapperDobleCol = styled.div`
+  display: flex; /*grid;*/
+  /* grid-template-columns: auto auto; */
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Title = styled.div`
   font-size: 28px;
   font-family: Genath-Regular, serif;
   line-height: 1.2em;
   letter-spacing: 2px;
-  background: red;
+  padding-bottom: 15px;
 `;
 
 const SummaryLabel = styled.div`
@@ -30,7 +43,32 @@ const SummaryLabel = styled.div`
   letter-spacing: 2px;
   line-height: 18px;
   color: #999999;
-  background: green;
+`;
+
+const SubWrapperPrice = styled.div`
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  padding-right: 10px;
+`;
+
+const InputPrice = styled.input`
+  font-family: Genath-Regular, serif;
+  font-size: 16px;
+  letter-spacing: 0;
+  width: 100%;
+  /* line-height: 30px; */
+  /* padding: 5px 10px; */
+  margin: 0;
+  border: 1px solid #dddddd;
+`;
+
+const Select = styled.select`
+  font-family: Genath-Regular, serif;
+  font-size: 14px;
+  letter-spacing: 0;
+  width: 100%;
+  border: 1px solid #dddddd;
 `;
 
 class Filters extends Component {
@@ -112,6 +150,16 @@ class Filters extends Component {
     //alert(ev.target.value);
     this.setState({ [ev.target.name]: ev.target.value });
   };
+  handleOnClear = (ev) => {
+    this.setState({
+      ...this.state,
+      idService: '',
+      minPrice: '',
+      maxPrice: '',
+      idDresser: '',
+      idCity: '',
+    });
+  };
 
   handleOnSubmit = async (ev) => {
     if (ev) ev.preventDefault();
@@ -137,68 +185,95 @@ class Filters extends Component {
 
   render = () => {
     return (
-      <Wrapper>
-        <Myh1>Filters:</Myh1>
-        <form onSubmit={this.handleOnSubmit}>
-          <SummaryLabel>Services:</SummaryLabel>
-          <select
-            name="idService"
-            value={this.state.idService}
-            onChange={this.handleOnChange}
-          >
-            {this.state.services.map((service, i) => (
-              <option value={service.id} key={i}>
-                {service.service}
-              </option>
-            ))}
-          </select>
-          <div>
-            <SummaryLabel>Price:</SummaryLabel>
-            <h2>Min price:</h2>
-            <input
-              type="text"
-              name="minPrice"
-              onChange={this.handleOnChange}
-              value={this.state.minPrice}
-            />
-            <h2>Max price:</h2>
-            <input
-              type="text"
-              name="maxPrice"
-              onChange={this.handleOnChange}
-              value={this.state.maxPrice}
-            />
-          </div>
-          <SummaryLabel>Hair dresser:</SummaryLabel>
-          <select
-            name="idDresser"
-            value={this.state.idDresser}
-            onChange={this.handleOnChange}
-          >
-            {this.state.dressers.map((dresser, i) => (
-              <option value={dresser.id} key={i}>
-                {dresser.name}
-              </option>
-            ))}
-          </select>
+      <FiltersWrapper>
+        <FilterWrapper>
+          <WrapperDobleCol>
+            <Title>Filters:</Title>
+            {/* <a href="#" onClick={this.handleOnClear}>
+              Clear all
+            </a> */}
+          </WrapperDobleCol>
+        </FilterWrapper>
 
-          <SummaryLabel>City:</SummaryLabel>
-          <select
-            name="idCity"
-            value={this.state.idCity}
-            onChange={this.handleOnChange}
-          >
-            {this.state.cities.map((city, i) => (
-              <option value={city.id} key={i}>
-                {city.name}
-              </option>
-            ))}
-          </select>
-          <div>
-            <input type="submit" value="Search" />
-          </div>
+        <form onSubmit={this.handleOnSubmit}>
+          <FilterWrapper>
+            <SummaryLabel>Services:</SummaryLabel>
+            <Select
+              name="idService"
+              value={this.state.idService}
+              onChange={this.handleOnChange}
+            >
+              {this.state.services.map((service, i) => (
+                <option value={service.id} key={i}>
+                  {service.service}
+                </option>
+              ))}
+            </Select>
+          </FilterWrapper>
+
+          <FilterWrapper>
+            <SummaryLabel>Price:</SummaryLabel>
+            <WrapperDobleCol>
+              <SubWrapperPrice>
+                <SummaryLabel>Min price:</SummaryLabel>
+                <InputPrice
+                  type="text"
+                  name="minPrice"
+                  onChange={this.handleOnChange}
+                  value={this.state.minPrice}
+                  pattern="[0-9]*"
+                  placeholder="0"
+                />
+              </SubWrapperPrice>
+              <SubWrapperPrice>
+                <SummaryLabel>Max price:</SummaryLabel>
+                <InputPrice
+                  type="text"
+                  name="maxPrice"
+                  onChange={this.handleOnChange}
+                  value={this.state.maxPrice}
+                  pattern="[0-9]*"
+                  placeholder="300"
+                />
+              </SubWrapperPrice>
+            </WrapperDobleCol>
+          </FilterWrapper>
+
+          <FilterWrapper>
+            <SummaryLabel>Hair dresser:</SummaryLabel>
+            <Select
+              name="idDresser"
+              value={this.state.idDresser}
+              onChange={this.handleOnChange}
+            >
+              {this.state.dressers.map((dresser, i) => (
+                <option value={dresser.id} key={i}>
+                  {dresser.name}
+                </option>
+              ))}
+            </Select>
+          </FilterWrapper>
+
+          <FilterWrapper>
+            <SummaryLabel>City:</SummaryLabel>
+            <Select
+              name="idCity"
+              value={this.state.idCity}
+              onChange={this.handleOnChange}
+            >
+              {this.state.cities.map((city, i) => (
+                <option value={city.id} key={i}>
+                  {city.name}
+                </option>
+              ))}
+            </Select>
+          </FilterWrapper>
+          <FilterWrapper>
+            <Button>Search</Button>
+            <Button onClick={this.handleOnClear}>Clear all</Button>
+          </FilterWrapper>
         </form>
-      </Wrapper>
+      </FiltersWrapper>
     );
   };
 }
