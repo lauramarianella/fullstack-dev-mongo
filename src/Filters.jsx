@@ -144,6 +144,7 @@ class Filters extends Component {
               name="idService"
               value={this.state.idService}
               onChange={this.handleOnChange}
+              onClick={this.handleOnSubmit}
             >
               {this.state.services.map((service, i) => (
                 <option value={service.id} key={i}>
@@ -187,6 +188,7 @@ class Filters extends Component {
               name="idDresser"
               value={this.state.idDresser}
               onChange={this.handleOnChange}
+              onClick={this.handleOnSubmit}
             >
               {this.state.dressers.map((dresser, i) => (
                 <option value={dresser.id} key={i}>
@@ -202,6 +204,7 @@ class Filters extends Component {
               name="idCity"
               value={this.state.idCity}
               onChange={this.handleOnChange}
+              onClick={this.handleOnSubmit}
             >
               {this.state.cities.map((city, i) => (
                 <option value={city.id} key={i}>

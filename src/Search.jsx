@@ -1,5 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
+
+import { Button, InputSign, FilterTitle } from './components';
+
+const SearchWrapper = styled.div`
+  width: 250px;
+  padding: 30px 20px 0px 20px;
+`;
+
+const SearchSubWrapper = styled.div`
+  padding: 15px 0px;
+  border-top: 1px solid #999999;
+`;
 
 class Search extends Component {
   constructor(props) {
@@ -40,18 +53,19 @@ class Search extends Component {
 
   render = () => {
     return (
-      <div>
-        <h2>Login</h2>
-        <form onSubmit={this.handleOnSubmit}>
-          <h2>Search Item</h2>
-          <input
-            type="text"
-            name="itemDescription"
-            onChange={this.handleOnChange}
-          />
-          <input type="submit" />
-        </form>
-      </div>
+      <SearchWrapper>
+        <SearchSubWrapper>
+          <form onSubmit={this.handleOnSubmit}>
+            <FilterTitle>Search Item:</FilterTitle>
+            <InputSign
+              type="text"
+              name="itemDescription"
+              onChange={this.handleOnChange}
+            />
+            <Button>Search</Button>
+          </form>
+        </SearchSubWrapper>
+      </SearchWrapper>
     );
   };
 }

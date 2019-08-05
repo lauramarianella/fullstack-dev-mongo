@@ -2,11 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import styled from 'styled-components';
-import { Card, CardTitle, Button } from './components';
+import {
+  CardWrapper,
+  Card,
+  CardTitle,
+  ImgSmall,
+  CardDescription,
+  CardPrice,
+  Button,
+} from './components';
 
 const Wrapper = styled.div`
   display: flex;
   align-items: flex-start;
+  flex-flow: row wrap;
 `;
 
 function Items(props) {
@@ -14,12 +23,15 @@ function Items(props) {
   return (
     <Wrapper>
       {props.listItems.map((item, index) => (
-        <Card key={index}>
-          <CardTitle>{item.description}</CardTitle>
-          <img src={`${item.imgSrc}`} height="100px" width="100px" />
-          <p>${item.cost}</p>
-          <Button onClick={() => handleOnClick(item.id, props)}>View</Button>
-        </Card>
+        <CardWrapper>
+          <Card key={index}>
+            <CardTitle>{item.title}</CardTitle>
+            <ImgSmall src={`${item.imgSrc}`} />
+            <CardDescription>{item.description}</CardDescription>
+            <CardPrice>${item.cost}</CardPrice>
+            <Button onClick={() => handleOnClick(item.id, props)}>View</Button>
+          </Card>
+        </CardWrapper>
       ))}
     </Wrapper>
   );
