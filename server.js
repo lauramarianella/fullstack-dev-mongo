@@ -17,6 +17,8 @@ let dressers = data.dressers;
 let rates = data.rates;
 let cities = data.cities;
 
+let query = require('./query.js');
+
 let passwords = { Laura: 'Rabah' };
 let sessions = {};
 
@@ -69,8 +71,6 @@ app.post('/signup', upload.none(), (req, res) => {
 app.post('/login', upload.none(), (req, res) => {
   let username = req.body.username;
   let password = req.body.password;
-  // console.log('passwords ', passwords);
-  // console.log('username ', username);
   if (passwords[username] === password) {
     let sessionId = generateId();
     sessions[sessionId] = username;
@@ -92,11 +92,9 @@ app.get('/logout', (req, res) => {
   if (sessions[sessionId]) {
     delete sessions[sessionId];
     res.send(JSON.stringify({ success: true }));
-    // res.sendFile(__dirname + '/build/index.html');
     return;
   }
   res.send(JSON.stringify({ success: false }));
-  // res.sendFile(__dirname + '/build/index.html');
 });
 
 app.post('/item/search', upload.none(), (req, res) => {
@@ -131,7 +129,6 @@ app.post('/item/search', upload.none(), (req, res) => {
     if (maxPrice)
       listItems = listItems.filter((items) => items.cost <= maxPrice);
 
-    //console.log('listItems: ', listItems);
     res.send(JSON.stringify({ success: true, listItems }));
     return;
   }
@@ -167,7 +164,6 @@ app.post('/item/details', upload.none(), (req, res) => {
       dresserServices: dresserServices,
     };
 
-    //console.log('itemDetails: ', itemDetails);
     res.send(JSON.stringify({ success: true, itemDetails }));
     return;
   }

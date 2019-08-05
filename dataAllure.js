@@ -29,12 +29,12 @@ let items = [
 ];
 
 let services = [
-  { id: 1, service: 'men' },
-  { id: 2, service: 'boys' },
-  { id: 3, service: 'girls' },
-  { id: 4, service: 'women' },
+  { id: 1, service: 'men haircut' },
+  { id: 2, service: "boys' haircut" },
+  { id: 3, service: "girls' haircut" },
+  { id: 4, service: 'women haircut' },
   { id: 5, service: 'styling' },
-  { id: 6, service: 'coloring' },
+  { id: 6, service: 'applying color' },
 ];
 
 let dressers = [

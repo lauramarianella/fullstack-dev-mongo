@@ -1,75 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+
 import {
-  WrapperSign,
-  Myh1Sign,
-  MypSign,
-  MyInputSign,
-  MyLinkSign,
   Button,
-  MydivError,
+  FiltersWrapper,
+  FilterWrapper,
+  FilterWrapperDobleCol,
+  FilterTitle,
+  FilterSummaryLabel,
+  FilterSubWrapperPrice,
+  FilterInputPrice,
+  FilterSelect,
 } from './components';
-
-const FiltersWrapper = styled.div`
-  width: 250px;
-  padding: 50px 20px;
-`;
-
-const FilterWrapper = styled.div`
-  padding: 15px 0px;
-  border-top: 1px solid #999999;
-`;
-
-const WrapperDobleCol = styled.div`
-  display: flex; /*grid;*/
-  /* grid-template-columns: auto auto; */
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const Title = styled.div`
-  font-size: 28px;
-  font-family: Genath-Regular, serif;
-  line-height: 1.2em;
-  letter-spacing: 2px;
-  padding-bottom: 15px;
-`;
-
-const SummaryLabel = styled.div`
-  font-family: EngraversGothic BT, sans-serif;
-  text-transform: uppercase;
-  font-size: 10px;
-  letter-spacing: 2px;
-  line-height: 18px;
-  color: #999999;
-`;
-
-const SubWrapperPrice = styled.div`
-  display: inline-block;
-  width: 100%;
-  box-sizing: border-box;
-  padding-right: 10px;
-`;
-
-const InputPrice = styled.input`
-  font-family: Genath-Regular, serif;
-  font-size: 16px;
-  letter-spacing: 0;
-  width: 100%;
-  /* line-height: 30px; */
-  /* padding: 5px 10px; */
-  margin: 0;
-  border: 1px solid #dddddd;
-`;
-
-const Select = styled.select`
-  font-family: Genath-Regular, serif;
-  font-size: 14px;
-  letter-spacing: 0;
-  width: 100%;
-  border: 1px solid #dddddd;
-`;
 
 class Filters extends Component {
   constructor() {
@@ -187,18 +129,18 @@ class Filters extends Component {
     return (
       <FiltersWrapper>
         <FilterWrapper>
-          <WrapperDobleCol>
-            <Title>Filters:</Title>
+          <FilterWrapperDobleCol>
+            <FilterTitle>Filters:</FilterTitle>
             {/* <a href="#" onClick={this.handleOnClear}>
               Clear all
             </a> */}
-          </WrapperDobleCol>
+          </FilterWrapperDobleCol>
         </FilterWrapper>
 
         <form onSubmit={this.handleOnSubmit}>
           <FilterWrapper>
-            <SummaryLabel>Services:</SummaryLabel>
-            <Select
+            <FilterSummaryLabel>Services:</FilterSummaryLabel>
+            <FilterSelect
               name="idService"
               value={this.state.idService}
               onChange={this.handleOnChange}
@@ -208,15 +150,15 @@ class Filters extends Component {
                   {service.service}
                 </option>
               ))}
-            </Select>
+            </FilterSelect>
           </FilterWrapper>
 
           <FilterWrapper>
-            <SummaryLabel>Price:</SummaryLabel>
-            <WrapperDobleCol>
-              <SubWrapperPrice>
-                <SummaryLabel>Min price:</SummaryLabel>
-                <InputPrice
+            <FilterSummaryLabel>Price:</FilterSummaryLabel>
+            <FilterWrapperDobleCol>
+              <FilterSubWrapperPrice>
+                <FilterSummaryLabel>Min price:</FilterSummaryLabel>
+                <FilterInputPrice
                   type="text"
                   name="minPrice"
                   onChange={this.handleOnChange}
@@ -224,10 +166,10 @@ class Filters extends Component {
                   pattern="[0-9]*"
                   placeholder="0"
                 />
-              </SubWrapperPrice>
-              <SubWrapperPrice>
-                <SummaryLabel>Max price:</SummaryLabel>
-                <InputPrice
+              </FilterSubWrapperPrice>
+              <FilterSubWrapperPrice>
+                <FilterSummaryLabel>Max price:</FilterSummaryLabel>
+                <FilterInputPrice
                   type="text"
                   name="maxPrice"
                   onChange={this.handleOnChange}
@@ -235,13 +177,13 @@ class Filters extends Component {
                   pattern="[0-9]*"
                   placeholder="300"
                 />
-              </SubWrapperPrice>
-            </WrapperDobleCol>
+              </FilterSubWrapperPrice>
+            </FilterWrapperDobleCol>
           </FilterWrapper>
 
           <FilterWrapper>
-            <SummaryLabel>Hair dresser:</SummaryLabel>
-            <Select
+            <FilterSummaryLabel>Hair dresser:</FilterSummaryLabel>
+            <FilterSelect
               name="idDresser"
               value={this.state.idDresser}
               onChange={this.handleOnChange}
@@ -251,12 +193,12 @@ class Filters extends Component {
                   {dresser.name}
                 </option>
               ))}
-            </Select>
+            </FilterSelect>
           </FilterWrapper>
 
           <FilterWrapper>
-            <SummaryLabel>City:</SummaryLabel>
-            <Select
+            <FilterSummaryLabel>City:</FilterSummaryLabel>
+            <FilterSelect
               name="idCity"
               value={this.state.idCity}
               onChange={this.handleOnChange}
@@ -266,7 +208,7 @@ class Filters extends Component {
                   {city.name}
                 </option>
               ))}
-            </Select>
+            </FilterSelect>
           </FilterWrapper>
           <FilterWrapper>
             <Button>Search</Button>

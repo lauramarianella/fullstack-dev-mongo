@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 
 import {
   WrapperSign,
-  Myh1Sign,
-  MypSign,
-  MyInputSign,
-  MyLinkSign,
+  HeaderSign,
+  TitleSign,
+  InputSign,
+  LinkSign,
   Button,
-  MydivError,
+  DivError,
 } from './components';
 
 class Login extends Component {
@@ -53,18 +53,18 @@ class Login extends Component {
   render = () => {
     return (
       <WrapperSign>
-        <Myh1Sign>Login into Allure</Myh1Sign>
+        <HeaderSign>Login into Allure</HeaderSign>
         <form onSubmit={this.handleOnSubmit}>
-          <MypSign>Username</MypSign>
-          <MyInputSign
+          <TitleSign>Username</TitleSign>
+          <InputSign
             type="text"
             name="username"
             value={this.state.username}
             onChange={this.handleOnChange}
             placeholder="Enter username"
           />
-          <MypSign>Password</MypSign>
-          <MyInputSign
+          <TitleSign>Password</TitleSign>
+          <InputSign
             type="password"
             name="password"
             value={this.state.password}
@@ -74,10 +74,10 @@ class Login extends Component {
           <div>
             <Button>Login</Button>
           </div>
-          <MydivError id="messageId" />
+          <DivError id="messageId" />
         </form>
         <div>
-          Don't have an account? <MyLinkSign to="/signup">Signup</MyLinkSign>
+          Don't have an account? <LinkSign to="/signup">Signup</LinkSign>
         </div>
       </WrapperSign>
     );

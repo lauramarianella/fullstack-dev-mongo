@@ -11,12 +11,13 @@
   --bg-secondary-color: #000;
   --font-secondary-color: #fff;
 
-  /* Combinations: #000, #fff, #333333, black, grey*/
-  /* Combinations: #b10dc9, #fff, #f012be, violeta, fucsia*/
-  /* Combinations: #0074d9, #fff, #7fdbff, blue, celeste*/
-  /* Combinations: gold, #fff, rgb(157, 187, 25), gold, green*/
+  /* Combinations: #000, #fff,#000, #333333, black, grey*/
+  /* Combinations: #b10dc9, #fff,#000, #f012be, violeta, fucsia*/
+  /* Combinations: #0074d9, #fff,#000, #7fdbff, blue, celeste*/
+  /* Combinations: gold, #fff,#000, rgb(157, 187, 25), gold, green*/
   --bg-tertiary-color: #000;
   --font-tertiary-color: #fff;
+  --font-tertiary-contrast-color: #000;
   --bg-hover-tertiary-color: #333333;
 
   --links-color: #0074d9;
@@ -25,7 +26,7 @@
   --bg-content-color: #fff;
   --bg-content-light-color: #fff;
 
-  --border-color: rgb(233, 231, 231);
+  --border-color: rgb(233, 231, 231); /*rgb(233, 231, 231), #dddddd*/
   --shadow-color: #fff; /*#888888*/
 
   --border-radius-m: 6px;
