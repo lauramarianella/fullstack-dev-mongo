@@ -108,22 +108,22 @@ class ItemDetails extends Component {
     });
 
     let taxesArray = this.state.taxesArray.map((taxObj) => {
-      taxObj.totalTax = subTotalObj.price * taxObj.tax;
+      taxObj.totalTax = Number(subTotalObj.price * taxObj.tax);
+      taxObj.totalTax = this.roundOff(taxObj.totalTax, 2);
       return taxObj;
     });
-    // taxesArray.forEach(
-    //   (tax) => (tax.totalTax = this.roundOff(tax.totalTax, 2))
-    // );
 
     let totalTaxesObj = taxesArray.reduce((acc, taxObj) => {
-      return { totalTax: acc.totalTax + taxObj.totalTax };
+      return { totalTax: Number(acc.totalTax) + Number(taxObj.totalTax) };
     });
+
+    let total = subTotalObj.price + totalTaxesObj.totalTax;
 
     this.setState({
       ...this.state,
       subTotal: this.roundOff(subTotalObj.price, 2),
       taxesArray: taxesArray,
-      total: this.roundOff(subTotalObj.price + totalTaxesObj.totalTax, 2),
+      total: this.roundOff(total, 2),
     });
   };
 
@@ -133,12 +133,12 @@ class ItemDetails extends Component {
     let taxesTHArray = this.state.taxesArray.map((tax, i) => {
       return (
         <tr key={`${i}taxTr`}>
-          <th colSpan={colSpanRemaining} key={`${i}taxTh`}>
+          <TdRight colSpan={colSpanRemaining} key={`${i}taxTh`}>
             {tax.name} ($)
-          </th>
-          <th colSpan={colSpanHairLenght} key={`${i}totTax`}>
+          </TdRight>
+          <TdRight colSpan={colSpanHairLenght} key={`${i}totTax`}>
             {tax.totalTax}
-          </th>
+          </TdRight>
         </tr>
       );
     });
@@ -252,13 +252,17 @@ class ItemDetails extends Component {
               <tbody>{tableBodyArray.map((tr) => tr)}</tbody>
               <TFoot>
                 <tr>
-                  <th colSpan={colSpanRemaining}>SubTotal($)</th>
-                  <th colSpan={colSpanHairLenght}>{this.state.subTotal}</th>
+                  <TdRight colSpan={colSpanRemaining}>SubTotal($)</TdRight>
+                  <TdRight colSpan={colSpanHairLenght}>
+                    {this.state.subTotal}
+                  </TdRight>
                 </tr>
                 {taxesTHArray.map((thTax) => thTax)}
                 <tr>
-                  <th colSpan={colSpanRemaining}>Total($)</th>
-                  <th colSpan={colSpanHairLenght}>{this.state.total}</th>
+                  <TdRight colSpan={colSpanRemaining}>Total($)</TdRight>
+                  <TdRight colSpan={colSpanHairLenght}>
+                    {this.state.total}
+                  </TdRight>
                 </tr>
               </TFoot>
             </Table>
