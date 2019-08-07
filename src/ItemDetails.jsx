@@ -37,8 +37,14 @@ const colSpanRemaining = 2; //5cols -colSpanHairLenght
 class ItemDetails extends Component {
   constructor(props) {
     super(props);
+    let initialOrder = this.props.itemDetails.dresserServices;
+    initialOrder.forEach((o) => (o.checked = false));
+    initialOrder.forEach((o) => {
+      o.g ? (o.price = o.g) : (o.price = -1);
+    }); //in the checking if it is -1 means they didn't choose an option in the hairlenght
+
     this.state = {
-      order: [], //{idService, idDresser, idPriceType(g,s,m,l), price}
+      order: initialOrder, //{idService, idDresser, idPriceType(g,s,m,l), price}
       subTotal: 0.0,
       taxesArray: [
         { tax: 0.05, name: 'HST', totalTax: 0.0 },
@@ -52,51 +58,72 @@ class ItemDetails extends Component {
     alert('++Shopping cart: ' + total);
   };
 
-  handleOnClickRadioBtn = (ev) => {
-    alert(ev.target.name);
-    alert(ev.target.value);
+  roundOff(quantity, decimals = 2) {
+    return quantity.toFixed(decimals);
+  }
+
+  handleOnClickRadioBtn = (ev, i) => {
+    let newOrder = this.state.order;
+    newOrder[i].price = Number(ev.target.value);
+    this.setState({ ...this.state, newOrder });
+
+    newOrder[i].checked = true;
+
+    this.computeDetailsPayment();
   };
-  handleOnClickCheckBox = (ev) => {
-    // this.setState({ [ev.target.name]: ev.target.value });
-    console.log('idDresser ', this.props.itemDetails.dresser.id);
-    console.log('ev.target.name ', ev.target.name);
-    console.log('ev.target.value ', ev.target.value);
-    alert('radBtn-' + ev.target.value);
-    // let radBtn = document.getElementByName('radBtn-' + ev.target.value);
-    // alert(radBtn.value);
+
+  handleOnClickCheckBox = (ev, i) => {
     let newOrder = this.state.order;
 
-    let price = 20;
+    ev.target.checked
+      ? (newOrder[i].checked = true)
+      : (newOrder[i].checked = false);
 
-    if (ev.target.checked)
-      newOrder.push({ idService: ev.target.value, price: price });
-    else {
-      let i = newOrder.find((sp, i) => {
-        sp.idService === ev.target.value;
-        return i;
-      });
-      newOrder.splice(i, 1);
-    }
+    this.setState({ ...this.state, newOrder });
 
-    let newSubTotalObj = newOrder.reduce((acc, servicePrice) => {
-      return { price: acc.price + servicePrice.price };
+    this.computeDetailsPayment();
+  };
+
+  isOrderNOTComplete() {
+    let order = this.state.order;
+    let orderFiltered = order.filter((o) => o.checked === true);
+    let isNotOk = orderFiltered.some((o) => o.price < 0);
+
+    document.getElementById('idDivError').innerText = isNotOk
+      ? 'Please, select the price according to your hair lenght!!!'
+      : '';
+
+    return isNotOk;
+  }
+
+  computeDetailsPayment = () => {
+    let order = this.state.order;
+
+    if (this.isOrderNOTComplete()) return;
+
+    let orderFiltered = order.filter((o) => o.checked === true);
+
+    let subTotalObj = orderFiltered.reduce((acc, order) => {
+      if (order.checked) return { price: acc.price + order.price };
     });
 
-    let newTaxesArray = this.state.taxesArray.map((taxObj) => {
-      taxObj.totalTax = newSubTotalObj.price * taxObj.tax;
+    let taxesArray = this.state.taxesArray.map((taxObj) => {
+      taxObj.totalTax = subTotalObj.price * taxObj.tax;
       return taxObj;
     });
+    // taxesArray.forEach(
+    //   (tax) => (tax.totalTax = this.roundOff(tax.totalTax, 2))
+    // );
 
-    let newTotalTaxesObj = newTaxesArray.reduce((acc, taxObj) => {
+    let totalTaxesObj = taxesArray.reduce((acc, taxObj) => {
       return { totalTax: acc.totalTax + taxObj.totalTax };
     });
 
     this.setState({
       ...this.state,
-      order: newOrder,
-      subTotal: newSubTotalObj.price,
-      taxesArray: newTaxesArray,
-      total: newSubTotalObj.price + newTotalTaxesObj.totalTax,
+      subTotal: this.roundOff(subTotalObj.price, 2),
+      taxesArray: taxesArray,
+      total: this.roundOff(subTotalObj.price + totalTaxesObj.totalTax, 2),
     });
   };
 
@@ -125,7 +152,8 @@ class ItemDetails extends Component {
               type="checkbox"
               value={dresserService.idService}
               name={`chk-${dresserService.idService}`}
-              onClick={this.handleOnClickCheckBox}
+              checked={this.state.order[i].checked}
+              onChange={(ev) => this.handleOnClickCheckBox(ev, i)}
             />
           </TdCenter>
         );
@@ -138,9 +166,9 @@ class ItemDetails extends Component {
               {dresserService.g}
               <input
                 type="radio"
-                name={`radBtn-${dresserService.idService}`}
-                value={dresserService.g}
-                onClick={this.handleOnClickRadioBtn}
+                name={`radBtn${i}`}
+                value={this.state.order[i].g}
+                onChange={(ev) => this.handleOnClickRadioBtn(ev, i)}
                 defaultChecked
               />
             </TdRight>
@@ -151,9 +179,9 @@ class ItemDetails extends Component {
               {dresserService.s}
               <input
                 type="radio"
-                name={`radBtn-${dresserService.idService}`}
-                value={dresserService.s}
-                onClick={this.handleOnClickRadioBtn}
+                name={`radBtn${i}`}
+                value={this.state.order[i].s}
+                onChange={(ev) => this.handleOnClickRadioBtn(ev, i)}
               />
             </TdRight>
           );
@@ -162,10 +190,9 @@ class ItemDetails extends Component {
               {dresserService.m}
               <input
                 type="radio"
-                name={`radBtn${dresserService.idService}`}
-                value={dresserService.m}
-                onClick={this.handleOnClickRadioBtn}
-                defaultChecked
+                name={`radBtn${i}`}
+                value={this.state.order[i].m}
+                onChange={(ev) => this.handleOnClickRadioBtn(ev, i)}
               />
             </TdRight>
           );
@@ -174,9 +201,9 @@ class ItemDetails extends Component {
               {dresserService.l}
               <input
                 type="radio"
-                name={`radBtn${dresserService.idService}`}
-                value={dresserService.l}
-                onClick={this.handleOnClickRadioBtn}
+                name={`radBtn${i}`}
+                value={this.state.order[i].l}
+                onChange={(ev) => this.handleOnClickRadioBtn(ev, i)}
               />
             </TdRight>
           );
@@ -237,6 +264,7 @@ class ItemDetails extends Component {
             </Table>
           </form>
         </div>
+        <div style={{ color: 'red' }} id="idDivError" />
         <WrapperBtn>
           <Button onClick={(ev) => this.handleOnSubmit(ev, this.state.total)}>
             Pay
