@@ -23,7 +23,7 @@ function Items(props) {
   return (
     <Wrapper>
       {props.listItems.map((item, index) => (
-        <CardWrapper>
+        <CardWrapper key={`${index}wrp`}>
           <Card key={index}>
             <CardTitle>{item.title}</CardTitle>
             <ImgSmall src={`${item.imgSrc}`} />

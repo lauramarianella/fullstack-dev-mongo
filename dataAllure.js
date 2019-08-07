@@ -50,16 +50,6 @@ let items = [
     cost: 70,
   },
   {
-    id: 6,
-    idDresser: 2,
-    idService: 1,
-    idCity: 2,
-    title: 'haircut men',
-    description: 'Cut men, from long to short',
-    imgSrc: '/images/menBeforeAfter.jpg',
-    cost: 30,
-  },
-  {
     id: 7,
     idDresser: 3,
     idService: 4,
@@ -93,8 +83,8 @@ let items = [
 
 let services = [
   { id: 1, service: 'men haircut' },
-  { id: 2, service: "boys' haircut" },
-  { id: 3, service: "girls' haircut" },
+  { id: 2, service: 'boys haircut' },
+  { id: 3, service: 'girls haircut' },
   { id: 4, service: 'women haircut' },
   { id: 5, service: 'styling' },
   { id: 6, service: 'applying color' },
@@ -108,11 +98,22 @@ let dressers = [
 ];
 
 let rates = [
-  { idDresser: 1, idService: 1, g: 20, s: 0, m: 0, l: 0 },
-  { idDresser: 1, idService: 4, g: 0, s: 20, m: 40, l: 60 },
-  { idDresser: 1, idService: 3, g: 30, s: 0, m: 0, l: 0 },
-  { idDresser: 1, idService: 5, g: 0, s: 30, m: 60, l: 90 },
-  { idDresser: 1, idService: 6, g: 0, s: 50, m: 90, l: 110 },
+  { idDresser: 1, idService: 1, g: 20.0, s: 0, m: 0, l: 0 },
+  { idDresser: 1, idService: 4, g: 0, s: 20.0, m: 40.0, l: 60.0 },
+  { idDresser: 1, idService: 3, g: 30.0, s: 0, m: 0, l: 0 },
+  { idDresser: 1, idService: 5, g: 0, s: 30.0, m: 60.0, l: 90.0 },
+  { idDresser: 1, idService: 6, g: 0, s: 50.0, m: 90.0, l: 110.99 },
+
+  { idDresser: 2, idService: 4, g: 0, s: 20, m: 40, l: 60 },
+  { idDresser: 2, idService: 3, g: 30, s: 0, m: 0, l: 0 },
+  { idDresser: 2, idService: 5, g: 0, s: 30, m: 60, l: 90 },
+  { idDresser: 2, idService: 6, g: 0, s: 50, m: 90, l: 110 },
+
+  { idDresser: 3, idService: 1, g: 20, s: 0, m: 0, l: 0 },
+  { idDresser: 3, idService: 4, g: 0, s: 20, m: 40, l: 60 },
+  { idDresser: 3, idService: 3, g: 30, s: 0, m: 0, l: 0 },
+  { idDresser: 3, idService: 5, g: 0, s: 30, m: 60, l: 90 },
+  { idDresser: 3, idService: 6, g: 0, s: 50, m: 90, l: 110 },
 ];
 
 let cities = [
