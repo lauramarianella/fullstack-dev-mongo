@@ -175,17 +175,20 @@ let rates = [
   { idDresser: 1, idService: 3, g: 30.0, s: 0, m: 0, l: 0 },
   { idDresser: 1, idService: 5, g: 0, s: 30.0, m: 60.0, l: 90.0 },
   { idDresser: 1, idService: 6, g: 0, s: 50.0, m: 90.0, l: 110.99 },
+  { idDresser: 1, idService: 7, g: 0, s: 50.0, m: 70.0, l: 120 },
 
   { idDresser: 2, idService: 4, g: 0, s: 20, m: 40, l: 60 },
   { idDresser: 2, idService: 3, g: 30, s: 0, m: 0, l: 0 },
   { idDresser: 2, idService: 5, g: 0, s: 30, m: 60, l: 90 },
   { idDresser: 2, idService: 6, g: 0, s: 50, m: 90, l: 110 },
+  { idDresser: 2, idService: 7, g: 0, s: 50.0, m: 70.0, l: 120 },
 
   { idDresser: 3, idService: 1, g: 20, s: 0, m: 0, l: 0 },
   { idDresser: 3, idService: 4, g: 0, s: 20, m: 40, l: 60 },
   { idDresser: 3, idService: 3, g: 30, s: 0, m: 0, l: 0 },
   { idDresser: 3, idService: 5, g: 0, s: 30, m: 60, l: 90 },
   { idDresser: 3, idService: 6, g: 0, s: 50, m: 90, l: 110 },
+  { idDresser: 3, idService: 7, g: 0, s: 50.0, m: 70.0, l: 120 },
 ];
 
 let cities = [

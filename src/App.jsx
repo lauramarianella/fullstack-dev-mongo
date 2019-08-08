@@ -10,6 +10,8 @@ import Filters from './Filters.jsx';
 import Items from './Items.jsx';
 import ItemDetails from './ItemDetails.jsx';
 
+import { StripeProvider } from 'react-stripe-elements';
+
 import styled from 'styled-components';
 import './main.css';
 
@@ -70,20 +72,22 @@ class App extends Component {
         componentToShow = <ItemDetails />;
 
       return (
-        <BrowserRouter>
-          <Wrapper>
-            <Navbar />
-            <Route path="/" exact render={this.renderHome} />
-            <Route path="/logout" render={this.renderLogout} />
-            <Wrapper2Cols>
-              <div>
-                {/* <Search /> */}
-                <Filters />
-              </div>
-              <div>{componentToShow}</div>
-            </Wrapper2Cols>
-          </Wrapper>
-        </BrowserRouter>
+        <StripeProvider apiKey="pk_test_6pRNASCoBOKtIshFeQd4XMUh">
+          <BrowserRouter>
+            <Wrapper>
+              <Navbar />
+              <Route path="/" exact render={this.renderHome} />
+              <Route path="/logout" render={this.renderLogout} />
+              <Wrapper2Cols>
+                <div>
+                  {/* <Search /> */}
+                  <Filters />
+                </div>
+                <div>{componentToShow}</div>
+              </Wrapper2Cols>
+            </Wrapper>
+          </BrowserRouter>
+        </StripeProvider>
       );
     }
 
