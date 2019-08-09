@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import styled, { css } from 'styled-components';
-import { mediaSizes } from './globals';
 // https://www.webucator.com/how-to/how-style-table-with-css.cfm
 import {
   Button,
@@ -15,12 +14,8 @@ import {
   TdLeft,
   TrEven,
   TFoot,
-  CardTitle,
-  DetailsWrapperDobleCol,
-  ImgLarge,
-  P,
-  PDresser,
 } from './components';
+import { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } from 'constants';
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -34,7 +29,7 @@ const Wrapper = styled.div`
 const colSpanHairLenght = 3;
 const colSpanRemaining = 2; //5cols -colSpanHairLenght
 
-class ItemDetails extends Component {
+class OrderForm extends Component {
   constructor(props) {
     super(props);
     let initialOrder = this.props.itemDetails.dresserServices;
@@ -55,7 +50,25 @@ class ItemDetails extends Component {
   }
 
   handleOnSubmit = (ev, total) => {
-    alert('++Shopping cart: ' + total);
+    ev.preventDefault();
+    if (!total) {
+      document.getElementById('idDivError').innerText =
+        'Please, select a service and choose the price according to your hair lenght!!!';
+      return;
+    }
+
+    if (confirm('Are you sure you want to proceed to the payment!!')) {
+      this.props.dispatch({
+        type: 'PAYMENT',
+        order: {
+          order: this.state.order,
+          subTotal: this.state.subTotal,
+          taxesArray: this.state.taxesArray,
+          total: this.state.total,
+        },
+      });
+    }
+    return;
   };
 
   roundOff(quantity, decimals = 2) {
@@ -218,20 +231,7 @@ class ItemDetails extends Component {
     );
 
     return (
-      <Wrapper>
-        <CardTitle>{this.props.itemDetails.item.title}</CardTitle>
-        <DetailsWrapperDobleCol>
-          <div>
-            <ImgLarge src={`${this.props.itemDetails.item.imgSrc}`} />
-          </div>
-          <div>
-            <P>${this.props.itemDetails.item.cost}</P>
-            <P>{this.props.itemDetails.item.description}</P>
-          </div>
-        </DetailsWrapperDobleCol>
-
-        <PDresser>@by {this.props.itemDetails.dresser.name}</PDresser>
-
+      <>
         <div>
           <form>
             <Table>
@@ -268,13 +268,14 @@ class ItemDetails extends Component {
             </Table>
           </form>
         </div>
+
         <div style={{ color: 'red' }} id="idDivError" />
         <WrapperBtn>
           <Button onClick={(ev) => this.handleOnSubmit(ev, this.state.total)}>
-            Pay
+            Place order
           </Button>
         </WrapperBtn>
-      </Wrapper>
+      </>
     );
   }
 }
@@ -283,4 +284,4 @@ let mapStateToProps = (state) => {
   return { itemDetails: state.itemDetails };
 };
 
-export default connect(mapStateToProps)(ItemDetails);
+export default connect(mapStateToProps)(OrderForm);

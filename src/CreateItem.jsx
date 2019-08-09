@@ -15,9 +15,7 @@ class CreateItem extends Component {
     };
   }
   componentDidMount() {
-    // this.props.dispatch({
-    //   type: 'SET-CREATE-ITEM-FORM',
-    // });
+    this.props.dispatch({ type: 'SET-CREATE-ITEM-FORM' });
   }
 
   handleOnSubmit = async (ev) => {

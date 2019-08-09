@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import CheckoutForm from './CheckoutForm.jsx';
-
-import { Elements } from 'react-stripe-elements';
+import OrderForm from './OrderForm.jsx';
 
 import styled, { css } from 'styled-components';
-import { mediaSizes } from './globals';
 // https://www.webucator.com/how-to/how-style-table-with-css.cfm
 import {
   CardTitle,
@@ -25,9 +22,6 @@ const Wrapper = styled.div`
   /* height: 600px; */
 `;
 
-const colSpanHairLenght = 3;
-const colSpanRemaining = 2; //5cols -colSpanHairLenght
-
 class ItemDetails extends Component {
   render() {
     if (!this.props.itemDetails.item.description) return '';
@@ -46,9 +40,7 @@ class ItemDetails extends Component {
 
         <PDresser>@by {this.props.itemDetails.dresser.name}</PDresser>
 
-        <Elements>
-          <CheckoutForm />
-        </Elements>
+        <OrderForm />
       </Wrapper>
     );
   }

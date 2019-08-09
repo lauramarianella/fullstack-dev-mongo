@@ -23,12 +23,19 @@ let reducer = (state, action) => {
     };
   }
 
-  if (action.type === 'SET-CREATE-ITEM-FORM') {
+  if (action.type === 'PAYMENT') {
     return {
       ...state,
-      componentToShow: 'createItem',
+      order: action.order,
+      componentToShow: 'checkoutForm',
     };
   }
+
+  // if (action.type === 'SET-CREATE-ITEM-FORM') {
+  //   return {
+  //     ...state,
+  //   };
+  // }
 
   return state;
 };
