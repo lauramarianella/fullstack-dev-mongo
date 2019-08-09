@@ -9,6 +9,7 @@ import Search from './Search.jsx';
 import Filters from './Filters.jsx';
 import Items from './Items.jsx';
 import ItemDetails from './ItemDetails.jsx';
+import CreateItem from './CreateItem.jsx';
 
 import { StripeProvider } from 'react-stripe-elements';
 
@@ -60,16 +61,30 @@ class App extends Component {
   renderSignup() {
     return <Signup />;
   }
+  renderCreateItem() {
+    return <CreateItem />;
+  }
   renderLogout() {
     return <Logout />;
   }
 
   render = () => {
     if (this.props.loggedIn) {
-      let componentToShow = <Items />;
-      if (this.props.componentToShow === 'items') componentToShow = <Items />;
-      if (this.props.componentToShow === 'itemDetails')
-        componentToShow = <ItemDetails />;
+      let componentsToShow = [];
+      componentsToShow.push(
+        <div>
+          {/* <Search /> */}
+          <Filters />
+        </div>
+      );
+      if (this.props.componentToShow === 'items') {
+        componentsToShow.push(<Items />);
+      } else if (this.props.componentToShow === 'itemDetails') {
+        componentsToShow.push(<ItemDetails />);
+      } else if (this.props.componentToShow === 'createItem') {
+        componentsToShow = [];
+        componentsToShow.push(<CreateItem />);
+      }
 
       return (
         <StripeProvider apiKey="pk_test_6pRNASCoBOKtIshFeQd4XMUh">
@@ -77,14 +92,9 @@ class App extends Component {
             <Wrapper>
               <Navbar />
               <Route path="/" exact render={this.renderHome} />
+              <Route path="/item/new" exact render={this.renderCreateItem} />
               <Route path="/logout" render={this.renderLogout} />
-              <Wrapper2Cols>
-                <div>
-                  {/* <Search /> */}
-                  <Filters />
-                </div>
-                <div>{componentToShow}</div>
-              </Wrapper2Cols>
+              <Wrapper2Cols>{componentsToShow}</Wrapper2Cols>
             </Wrapper>
           </BrowserRouter>
         </StripeProvider>

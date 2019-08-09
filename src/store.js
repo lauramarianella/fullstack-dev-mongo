@@ -23,6 +23,13 @@ let reducer = (state, action) => {
     };
   }
 
+  if (action.type === 'SET-CREATE-ITEM-FORM') {
+    return {
+      ...state,
+      componentToShow: 'createItem',
+    };
+  }
+
   return state;
 };
 

@@ -47,7 +47,12 @@ const NavLink = styled(Link)`
 let Navbar = (props) => {
   let navLinksContent = <NavLink to="/login">LOGIN</NavLink>;
   if (props.loggedIn) {
-    navLinksContent = <NavLink to="/logout">LOGOUT</NavLink>;
+    navLinksContent = (
+      <>
+        <NavLink to="/item/new">NEW-ITEM</NavLink>
+        <NavLink to="/logout">LOGOUT</NavLink>
+      </>
+    );
   }
   return (
     <Wrapper>

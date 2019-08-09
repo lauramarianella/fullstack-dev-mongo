@@ -54,9 +54,10 @@ export const FilterInputPrice = styled.input`
 
 export const FilterSelect = styled.select`
   font-family: Genath-Regular, serif;
-  font-size: 14px;
-  line-height: 50px;
+  font-size: 16px;
+  /* line-height: 50px; */
   letter-spacing: 0;
   width: 100%;
+  height: 28px;
   border: 1px solid var(--border-color); /*#dddddd*/
 `;

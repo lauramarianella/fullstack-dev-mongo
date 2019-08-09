@@ -200,6 +200,43 @@ app.get('/item/cities', (req, res) => {
   res.send(JSON.stringify({ success: false }));
 });
 
+app.post('/item/new', upload.single('filename'), (req, res) => {
+  let sessionId = req.cookies.sid;
+
+  if (sessions[sessionId]) {
+    let file = req.file;
+    let frontendPath = file ? '/images/' + file.filename : undefined;
+    console.log(file);
+    console.log(file.filename);
+    let id = items.length + 1;
+    let idDresser = Number(req.body.idDresser);
+    let idService = Number(req.body.idService);
+    let idCity = Number(req.body.idCity);
+    let title = req.body.title;
+    let description = req.body.description;
+    let cost = Number(req.body.cost);
+
+    let newItem = {
+      id,
+      idDresser,
+      idService,
+      idCity,
+      title,
+      description,
+      imgSrc: frontendPath,
+      cost,
+    };
+
+    console.log(newItem);
+
+    items.push(newItem);
+
+    res.send(JSON.stringify({ success: true }));
+    return;
+  }
+  res.send(JSON.stringify({ success: false }));
+});
+
 app.all('/*', (req, res) => {
   res.sendFile(__dirname + '/build/index.html');
 });
