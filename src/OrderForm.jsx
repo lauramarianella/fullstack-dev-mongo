@@ -39,7 +39,7 @@ class OrderForm extends Component {
     }); //in the checking if it is -1 means they didn't choose an option in the hairlenght
 
     this.state = {
-      order: initialOrder, //{idService, idDresser, idPriceType(g,s,m,l), price}
+      order: initialOrder, //{idService, service, idDresser, idPriceType(g,s,m,l), price}
       subTotal: 0.0,
       taxesArray: [
         { tax: 0.05, name: 'HST', totalTax: 0.0 },
@@ -65,6 +65,7 @@ class OrderForm extends Component {
           subTotal: this.state.subTotal,
           taxesArray: this.state.taxesArray,
           total: this.state.total,
+          dresser: this.props.itemDetails.dresser,
         },
       });
     }
@@ -147,7 +148,7 @@ class OrderForm extends Component {
       return (
         <tr key={`${i}taxTr`}>
           <TdRight colSpan={colSpanRemaining} key={`${i}taxTh`}>
-            {tax.name} ($)
+            {tax.name}({tax.tax * 100}%) ($)
           </TdRight>
           <TdRight colSpan={colSpanHairLenght} key={`${i}totTax`}>
             {tax.totalTax}

@@ -22,6 +22,12 @@ let reducer = (state, action) => {
       componentToShow: 'itemDetails',
     };
   }
+  if (action.type === 'SHOW_COMPONENT') {
+    return {
+      ...state,
+      componentToShow: action.componentToShow,
+    };
+  }
 
   if (action.type === 'PAYMENT') {
     return {
@@ -31,11 +37,13 @@ let reducer = (state, action) => {
     };
   }
 
-  // if (action.type === 'SET-CREATE-ITEM-FORM') {
-  //   return {
-  //     ...state,
-  //   };
-  // }
+  if (action.type === 'SET_ID_FROM_COMBO') {
+    console.log('Store.js ' + [action.name] + ' ' + [action.value]);
+    return {
+      ...state,
+      [action.name]: action.value,
+    };
+  }
 
   return state;
 };

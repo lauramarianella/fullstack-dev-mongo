@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Services from './Services.jsx';
+import Dressers from './Dressers.jsx';
+import Cities from './Cities.jsx';
 
 import {
   Button,
@@ -10,83 +13,24 @@ import {
   FilterSummaryLabel,
   FilterSubWrapperPrice,
   FilterInputPrice,
-  FilterSelect,
 } from './components';
 
 class Filters extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
-      idService: '',
+      // idService: '',
       minPrice: '',
       maxPrice: '',
-      idDresser: '',
-      idCity: '',
-      services: [],
-      dressers: [],
-      cities: [],
+      // idDresser: '',
+      // idCity: '',
     };
   }
 
   componentDidMount() {
-    this.getFilters();
     this.handleOnSubmit();
   }
-
-  getFilters = () => {
-    this.getServices();
-    this.getDressers();
-    this.getCities();
-  };
-
-  getServices = async () => {
-    let response = await fetch('/item/services', {
-      method: 'GET',
-      credentials: 'same-origin',
-    });
-    let responseBody = await response.text();
-    let body = JSON.parse(responseBody);
-    if (!body.success) {
-      alert("Can't show the services");
-      return;
-    }
-    //console.log('services ', body.services);
-    let myServices = body.services;
-    myServices.unshift({ id: '', service: '' });
-    //console.log(myServices);
-    this.setState({ services: myServices });
-  };
-
-  getDressers = async () => {
-    let response = await fetch('/item/dressers', {
-      method: 'GET',
-      credentials: 'same-origin',
-    });
-    let body = await response.json();
-    if (!body.success) {
-      alert("Can't show the hair dressers");
-      return;
-    }
-
-    let myDressers = body.dressers;
-    myDressers.unshift({ id: '', name: '' });
-    this.setState({ ...this.state, dressers: myDressers });
-  };
-
-  getCities = async () => {
-    let response = await fetch('/item/cities', {
-      method: 'GET',
-      credentials: 'same-origin',
-    });
-    let body = await response.json();
-    if (!body.success) {
-      alert("Can't show the cities");
-      return;
-    }
-    let myCities = body.cities;
-    myCities.unshift({ id: '', name: '' });
-    this.setState({ ...this.state, cities: myCities });
-  };
 
   handleOnChange = (ev) => {
     //alert(ev.target.value);
@@ -95,20 +39,38 @@ class Filters extends Component {
   handleOnClear = (ev) => {
     this.setState({
       ...this.state,
-      idService: '',
+      // idService: '',
       minPrice: '',
       maxPrice: '',
-      idDresser: '',
-      idCity: '',
+      //idDresser: '',
+      // idCity: '',
+    });
+
+    this.props.dispatch({
+      type: 'SET_ID_FROM_COMBO',
+      name: 'idService',
+      value: '',
+    });
+    this.props.dispatch({
+      type: 'SET_ID_FROM_COMBO',
+      name: 'idDresser',
+      value: '',
+    });
+    this.props.dispatch({
+      type: 'SET_ID_FROM_COMBO',
+      name: 'idCity',
+      value: '',
     });
   };
 
   handleOnSubmit = async (ev) => {
     if (ev) ev.preventDefault();
+
     let formData = new FormData();
-    formData.append('idService', this.state.idService);
-    formData.append('idDresser', this.state.idDresser);
-    formData.append('idCity', this.state.idCity);
+    formData.append('idService', this.props.idService);
+    formData.append('idDresser', this.props.idDresser);
+    formData.append('idCity', this.props.idCity);
+
     formData.append('minPrice', this.state.minPrice);
     formData.append('maxPrice', this.state.maxPrice);
 
@@ -139,23 +101,11 @@ class Filters extends Component {
 
         <form onSubmit={this.handleOnSubmit}>
           <FilterWrapper>
-            <FilterSummaryLabel>Services:</FilterSummaryLabel>
-            <FilterSelect
-              name="idService"
-              value={this.state.idService}
-              onChange={this.handleOnChange}
-              onClick={this.handleOnSubmit}
-            >
-              {this.state.services.map((service, i) => (
-                <option value={service.id} key={i}>
-                  {service.service}
-                </option>
-              ))}
-            </FilterSelect>
+            <Services />
           </FilterWrapper>
 
           <FilterWrapper>
-            <FilterSummaryLabel>Price:</FilterSummaryLabel>
+            <FilterSummaryLabel>Price (CAD):</FilterSummaryLabel>
             <FilterWrapperDobleCol>
               <FilterSubWrapperPrice>
                 <FilterSummaryLabel>Min price:</FilterSummaryLabel>
@@ -183,36 +133,13 @@ class Filters extends Component {
           </FilterWrapper>
 
           <FilterWrapper>
-            <FilterSummaryLabel>Hair dresser:</FilterSummaryLabel>
-            <FilterSelect
-              name="idDresser"
-              value={this.state.idDresser}
-              onChange={this.handleOnChange}
-              onClick={this.handleOnSubmit}
-            >
-              {this.state.dressers.map((dresser, i) => (
-                <option value={dresser.id} key={i}>
-                  {dresser.name}
-                </option>
-              ))}
-            </FilterSelect>
+            <Dressers />
           </FilterWrapper>
 
           <FilterWrapper>
-            <FilterSummaryLabel>City:</FilterSummaryLabel>
-            <FilterSelect
-              name="idCity"
-              value={this.state.idCity}
-              onChange={this.handleOnChange}
-              onClick={this.handleOnSubmit}
-            >
-              {this.state.cities.map((city, i) => (
-                <option value={city.id} key={i}>
-                  {city.name}
-                </option>
-              ))}
-            </FilterSelect>
+            <Cities />
           </FilterWrapper>
+
           <FilterWrapper>
             <Button>Search</Button>
             <Button onClick={this.handleOnClear}>Clear all</Button>
@@ -224,7 +151,12 @@ class Filters extends Component {
 }
 
 let mapStateToProps = (state) => {
-  return { listItems: state.listItems };
+  return {
+    listItems: state.listItems,
+    idService: state.idService,
+    idDresser: state.idDresser,
+    idCity: state.idCity,
+  };
 };
 
 export default connect(mapStateToProps)(Filters);

@@ -16,6 +16,19 @@ const Wrapper2Cols = styled.div`
   min-height: 100vh;
   background: var(--bg-content-color);
 `;
+const Div = styled.div`
+  width: 300px;
+  background: #fff;
+`;
+const Wrapper1Col = styled.div`
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  & > ${Div} {
+    min-width: 60%;
+  }
+  background: var(--bg-content-color);
+`;
 
 class Home extends Component {
   constructor(props) {
@@ -24,31 +37,34 @@ class Home extends Component {
   }
 
   render = () => {
-    let componentToShow = <Items />;
-    if (this.props.componentToShow === 'items') componentToShow = <Items />;
-    if (this.props.componentToShow === 'itemDetails')
-      componentToShow = (
-        <div>
-          <ItemDetails />
-        </div>
-      );
-    if (this.props.componentToShow === 'checkoutForm')
-      componentToShow = (
-        <>
-          <Elements>
-            <ChekoutForm />
-          </Elements>
-        </>
-      );
-    return (
-      <Wrapper2Cols>
-        <div>
-          {/* <Search /> */}
-          <Filters />
-        </div>
-        {componentToShow}
-      </Wrapper2Cols>
+    let componentsToShow = [];
+    componentsToShow.push(
+      <div key="divFilters">
+        {/* <Search /> */}
+        <Filters key="filters" />
+      </div>
     );
+
+    if (this.props.componentToShow === 'items')
+      componentsToShow.push(<Items key="items" />);
+    if (this.props.componentToShow === 'itemDetails')
+      componentsToShow.push(
+        <div key="divItemDetails">
+          <ItemDetails key="itemDetails" />
+        </div>
+      );
+
+    if (this.props.componentToShow === 'checkoutForm')
+      return (
+        <Wrapper1Col key="wrapPay">
+          <Div key="divPay">
+            <Elements key="elemPay">
+              <ChekoutForm key="formPay" />
+            </Elements>
+          </Div>
+        </Wrapper1Col>
+      );
+    return <Wrapper2Cols key="wrap2Cols">{componentsToShow}</Wrapper2Cols>;
   };
 }
 let mapStateToProps = (state) => {
