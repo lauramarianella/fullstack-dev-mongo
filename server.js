@@ -10,6 +10,8 @@ app.use(cookieParser());
 let reloadMagic = require('./reload-magic.js');
 reloadMagic(app);
 
+let stripeLoader = require('stripe');
+
 let data = require('./dataAllure.js');
 let items = data.items;
 let services = data.services;
@@ -235,6 +237,30 @@ app.post('/item/new', upload.single('filename'), (req, res) => {
     return;
   }
   res.send(JSON.stringify({ success: false }));
+});
+
+const stripe = new stripeLoader('sk_test_e8Lw2Xu3GxSclAsefU1wYtEx00GPd1EvtM');
+
+const charge = (token, amt) => {
+  return stripe.charges.create({
+    amount: amt * 100,
+    currency: 'usd',
+    source: token,
+    description: 'Statement description',
+  });
+};
+app.post('/billing/pay', upload.none(), async (req, res, next) => {
+  try {
+    console.log(req.body.idToken);
+    console.log(req.body.amount);
+    let data = await charge(req.body.idToken, req.body.amount);
+    console.log(data);
+    res.send(JSON.stringify({ success: true }));
+  } catch (e) {
+    console.log(e);
+    //res.status(500);
+    res.send(JSON.stringify({ success: false }));
+  }
 });
 
 app.all('/*', (req, res) => {

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { TAX_ARRAY } from './globals.js';
+
 import styled, { css } from 'styled-components';
 // https://www.webucator.com/how-to/how-style-table-with-css.cfm
 import {
@@ -15,7 +17,7 @@ import {
   TrEven,
   TFoot,
 } from './components';
-import { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } from 'constants';
+// import { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } from 'constants';
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -37,14 +39,16 @@ class OrderForm extends Component {
     initialOrder.forEach((o) => {
       o.g ? (o.price = o.g) : (o.price = -1);
     }); //in the checking if it is -1 means they didn't choose an option in the hairlenght
-
+    let taxesArray = TAX_ARRAY;
+    taxesArray.forEach((tx) => (tx.totalTax = 0.0));
     this.state = {
       order: initialOrder, //{idService, service, idDresser, idPriceType(g,s,m,l), price}
       subTotal: 0.0,
-      taxesArray: [
-        { tax: 0.05, name: 'HST', totalTax: 0.0 },
-        { tax: 0.1, name: 'QST', totalTax: 0.0 },
-      ],
+      // taxesArray: [
+      //   { tax: 0.05, name: 'HST', totalTax: 0.0 },
+      //   { tax: 0.1, name: 'QST', totalTax: 0.0 },
+      // ],
+      taxesArray: taxesArray,
       total: 0.0,
     };
   }

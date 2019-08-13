@@ -32,32 +32,51 @@ class _CheckouForm extends Component {
     this.state = { name: '' };
   }
 
-  handleOnSubmit = (ev, total) => {
+  handleOnSubmit = async (ev, total) => {
     ev.preventDefault();
     document.getElementById('idDivError').innerText = '';
 
     if (this.props.stripe) {
       console.log('class -CardForm -::- Paying');
-      this.props.stripe
-        .createToken({ type: 'card', name: this.state.name })
-        .then((payload) => {
-          console.log('[el token]', payload);
-          if (payload.error) {
-            document.getElementById('idDivError').innerText =
-              payload.error.message;
-          } else {
-            alert('Thank you for your payment ' + this.state.name);
-            this.handleOnCancel(null);
-          }
-        });
+      let payload = await this.props.stripe.createToken({
+        type: 'card',
+        name: this.state.name,
+      });
+      // .then((payload) => {
+      //   console.log('[el token]', payload);
+      //   if (payload.error) {
+      //     document.getElementById('idDivError').innerText =
+      //       payload.error.message;
+      //     return;
+      //   }
+      console.log(payload);
+      let formData = new FormData();
+      formData.append('idToken', payload.token.id);
+      formData.append('amount', this.props.order.total);
+      let response = await fetch('/billing/pay', {
+        method: 'POST',
+        // headers: { 'Content-type': 'application/json' },
+        body: formData /*JSON.stringify({ payload, total }),*/,
+        credentials: 'include',
+      });
+      let responseBody = await response.text();
+      let body = JSON.parse(responseBody);
+      if (!body.success) {
+        alert('Payment failed');
+        return;
+      }
+      alert('Thank you for your payment ' + this.state.name);
+      this.handleOnCancel(null);
+
+      // });
     } else {
       console.log("Stripe.js hasn't loaded yet.");
     }
   };
-  handleOnCancel = (ev) => {
+  handleCancel = (ev) => {
     this.props.dispatch({
       type: 'SHOW_COMPONENT',
-      componentToShow: 'items',
+      componentToShow: 'itemDetails',
     });
   };
 
@@ -76,28 +95,30 @@ class _CheckouForm extends Component {
         >
           <Table>
             <Caption>Order Summary</Caption>
-            {filteredOrder.map((o, i) => (
-              <tr key={'item' + i}>
-                <TdLeft>{o.service.service}</TdLeft>
-                <TdRight>{o.price}</TdRight>
+            <tbody>
+              {filteredOrder.map((o, i) => (
+                <tr key={'item' + i}>
+                  <TdLeft>{o.service.service}</TdLeft>
+                  <TdRight>{o.price}</TdRight>
+                </tr>
+              ))}
+              <tr>
+                <Th>Subtotal</Th>
+                <TdRight>{this.props.order.subTotal}</TdRight>
               </tr>
-            ))}
-            <tr>
-              <Th>Subtotal</Th>
-              <TdRight>{this.props.order.subTotal}</TdRight>
-            </tr>
-            {this.props.order.taxesArray.map((tax, i) => (
-              <tr key={'tax' + i}>
-                <Th>
-                  {tax.name}({tax.tax * 100}%)
-                </Th>
-                <TdRight>{tax.totalTax}</TdRight>
+              {this.props.order.taxesArray.map((tax, i) => (
+                <tr key={'tax' + i}>
+                  <Th>
+                    {tax.name}({tax.tax * 100}%)
+                  </Th>
+                  <TdRight>{tax.totalTax}</TdRight>
+                </tr>
+              ))}
+              <tr>
+                <Th>Total</Th>
+                <TdRight>{this.props.order.total}</TdRight>
               </tr>
-            ))}
-            <tr>
-              <Th>Total</Th>
-              <TdRight>{this.props.order.total}</TdRight>
-            </tr>
+            </tbody>
           </Table>
           <h3>by {this.props.order.dresser.name}</h3>
 
@@ -109,16 +130,16 @@ class _CheckouForm extends Component {
               placehoder="Name as on credit card"
               required
               value={this.state.name}
-              onChange={this.handleOnChange}
+              onChange={this.handleChange}
             />
           </div>
           <CardSection />
           <div style={{ color: 'red' }} id="idDivError" />
-          <WrapperBtn>
-            <Button>Make payment</Button>
-            <Button onClick={(ev) => this.handleCancel(ev)}>Cancel</Button>
-          </WrapperBtn>
         </form>
+        <WrapperBtn>
+          <Button>Make payment</Button>
+          <Button onClick={this.handleCancel}>Cancel</Button>
+        </WrapperBtn>
       </Wrapper>
     );
   }

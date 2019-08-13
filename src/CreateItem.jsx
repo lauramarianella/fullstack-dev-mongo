@@ -4,10 +4,44 @@ import Services from './Services.jsx';
 import Dressers from './Dressers.jsx';
 import Cities from './Cities.jsx';
 
+import {
+  InputSign,
+  FilterInputPrice,
+  FilterWrapperDobleCol,
+  Button,
+} from './components';
+
 import styled from 'styled-components';
 const Wrapper = styled.div`
-  width: 400px;
+  margin: 0 auto;
+  max-width: 800px;
+  box-sizing: border-box;
+  padding: 0 5px;
   background: yellow;
+`;
+
+const SubWrapper = styled.div`
+  padding: 15px 0px;
+  max-width: 500px;
+`;
+
+const TextArea = styled.textarea`
+  max-width: 300px;
+  width: 100%;
+  height: 90px;
+  margin-bottom: 20px;
+  border: 1.5px solid rgb(233, 231, 231);
+  background: transparent;
+  outline: none;
+
+  font-size: 0.9rem; /*16px*/
+`;
+
+const FilterSubWrapperPrice = styled.div`
+  display: inline-block;
+  width: 30%;
+  box-sizing: border-box;
+  padding-right: 10px;
 `;
 
 class CreateItem extends Component {
@@ -85,34 +119,45 @@ class CreateItem extends Component {
       <Wrapper>
         <form onSubmit={this.handleOnSubmit}>
           <h3>Dresser:</h3>
-          <Dressers />
+          <SubWrapper>
+            <Dressers />
+          </SubWrapper>
           <h3>Service:</h3>
-          <Services />
+          <SubWrapper>
+            <Services />
+          </SubWrapper>
           <h3>City:</h3>
-          <Cities />
+          <SubWrapper>
+            <Cities />
+          </SubWrapper>
           <h3>title:</h3>
-          <input
+          <InputSign
             type="text"
             name="title"
+            placeholder="Use an appealing title"
             onChange={this.handleOnChange}
             required
           />
           <h3>Description:</h3>
-          <input
-            type="text"
+          <TextArea
             name="description"
+            placeholder="Describe the service provided"
             onChange={this.handleOnChange}
-            required
           />
-          <h3>Cost:(CAD)</h3>
-          <input
-            type="text"
-            name="cost"
-            onChange={this.handleOnChange}
-            pattern="[0-9]*"
-            placeholder="20"
-            required
-          />
+          <FilterWrapperDobleCol>
+            <h3>Cost:(CAD)</h3>
+            <FilterSubWrapperPrice>
+              <FilterInputPrice
+                type="text"
+                name="cost"
+                onChange={this.handleOnChange}
+                min="0" // pattern="[0-9]*"
+                step=".01"
+                placeholder="19.99"
+                required
+              />
+            </FilterSubWrapperPrice>
+          </FilterWrapperDobleCol>
           <h3>File:</h3>
           <input
             type="file"
@@ -120,10 +165,11 @@ class CreateItem extends Component {
             id="fileId"
             required
           />
-
-          <button>Submit</button>
+          <SubWrapper>
+            <Button>Submit</Button>
+          </SubWrapper>
         </form>
-        <button onClick={this.handleCancel}>Cancel</button>
+        <Button onClick={this.handleCancel}>Cancel</Button>
       </Wrapper>
     );
   };

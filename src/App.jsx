@@ -63,7 +63,8 @@ class App extends Component {
 
     if (this.props.loggedIn) {
       return (
-        <StripeProvider apiKey="pk_test_6pRNASCoBOKtIshFeQd4XMUh">
+        /*pk_test_6pRNASCoBOKtIshFeQd4XMUh this is from the DEMO...*/
+        <StripeProvider apiKey="pk_test_9IrtnqiGkcghOzRVW8C3NvAa00RFQz6IoQ">
           <BrowserRouter>
             <Wrapper>
               <Navbar />

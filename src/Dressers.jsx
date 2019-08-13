@@ -56,6 +56,7 @@ class Dressers extends Component {
 
     let myDressers = body.dressers;
     myDressers.unshift({ id: '', name: '' });
+
     this.setState({ ...this.state, dressers: myDressers });
   };
 }

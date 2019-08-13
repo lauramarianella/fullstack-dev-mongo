@@ -56,6 +56,7 @@ export const FilterSelect = styled.select`
   font-family: Genath-Regular, serif;
   font-size: 16px;
   /* line-height: 50px; */
+  background: transparent;
   letter-spacing: 0;
   width: 100%;
   height: 28px;

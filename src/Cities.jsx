@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { FilterSummaryLabel, FilterSelect } from './components';
 
 class Cities extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = { idCity: '', cities: [] };
   }
 
@@ -55,6 +55,7 @@ class Cities extends Component {
     }
     let myCities = body.cities;
     myCities.unshift({ id: '', name: '' });
+
     this.setState({ ...this.state, cities: myCities });
   };
 }
