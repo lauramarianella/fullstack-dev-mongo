@@ -13,7 +13,7 @@ export const ImgLarge = styled.img`
   margin: 0;
   padding: 5px 0px 0px 0px;
   height: 250px;
-  width: 350px;
+  width: 500px;
 `;
 
 export const PCss = css`

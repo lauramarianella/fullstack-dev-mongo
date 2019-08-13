@@ -20,6 +20,7 @@ const Wrapper = styled.div`
 
 function Items(props) {
   if (props.listItems.length <= 0) return '';
+
   return (
     <Wrapper>
       {props.listItems.map((item, index) => (
@@ -27,7 +28,7 @@ function Items(props) {
           <Card key={index}>
             <CardTitle>{item.title}</CardTitle>
             <ImgSmall src={`${item.imgSrc}`} />
-            <CardDescription>{item.description}</CardDescription>
+            <CardDescription>{item.description.substr(0, 45)}</CardDescription>
             <CardPrice>${item.cost}</CardPrice>
             <Button onClick={() => handleOnClick(item.id, props)}>View</Button>
           </Card>

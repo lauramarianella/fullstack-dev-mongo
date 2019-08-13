@@ -11,7 +11,6 @@ import {
   Button,
   WrapperBtn,
   InputSign,
-  Table,
   Caption,
   Th,
   TdCenter,
@@ -21,9 +20,15 @@ import {
   TFoot,
 } from './components';
 
+const Table = styled.table`
+  padding: 10px 0px 0px 50px;
+  margin: 0; /* margin: auto; */
+  width: 400px;
+  border-collapse: collapse;
+`;
 const Wrapper = styled.div`
   width: 400px;
-  background: yellow;
+  background: var(--bg-content-color);
 `;
 
 class _CheckouForm extends Component {
@@ -120,8 +125,9 @@ class _CheckouForm extends Component {
               </tr>
             </tbody>
           </Table>
-          <h3>by {this.props.order.dresser.name}</h3>
-
+          <span>
+            <b>{this.props.order.dresser.name} will be at your service!!!</b>
+          </span>
           <div>
             <h3>Name:</h3>
             <InputSign

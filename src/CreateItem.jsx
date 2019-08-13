@@ -15,15 +15,21 @@ import {
 import styled from 'styled-components';
 const Wrapper = styled.div`
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 900px;
   box-sizing: border-box;
   padding: 0 5px;
-  background: yellow;
+  background: var(--bg-content-color);
+  border: 1px solid var(--border-color);
+`;
+const SubWrapper = styled.div`
+  max-width: 500px;
+  /* border: 1px solid yellow; */
 `;
 
-const SubWrapper = styled.div`
+const SubWrapperBtns = styled.div`
   padding: 15px 0px;
   max-width: 500px;
+  /* border: 1px solid red; */
 `;
 
 const TextArea = styled.textarea`
@@ -122,19 +128,19 @@ class CreateItem extends Component {
     return (
       <Wrapper>
         <form onSubmit={this.handleOnSubmit}>
-          <h3>Dresser:</h3>
           <SubWrapper>
+            <h4>Dresser:</h4>
             <Dressers />
           </SubWrapper>
-          <h3>Service:</h3>
           <SubWrapper>
+            <h4>Service:</h4>
             <Services />
           </SubWrapper>
-          <h3>City:</h3>
           <SubWrapper>
+            <h4>City:</h4>
             <Cities />
           </SubWrapper>
-          <h3>title:</h3>
+          <h4>title:</h4>
           <InputSign
             type="text"
             name="title"
@@ -142,14 +148,14 @@ class CreateItem extends Component {
             onChange={this.handleOnChange}
             required
           />
-          <h3>Description:</h3>
+          <h4>Description:</h4>
           <TextArea
             name="description"
             placeholder="Describe the service provided"
             onChange={this.handleOnChange}
           />
           <FilterWrapperDobleCol>
-            <h3>Cost:(CAD)</h3>
+            <h4>Cost:(CAD)</h4>
             <FilterSubWrapperPrice>
               <FilterInputPrice
                 type="text"
@@ -162,16 +168,18 @@ class CreateItem extends Component {
               />
             </FilterSubWrapperPrice>
           </FilterWrapperDobleCol>
-          <h3>File:</h3>
+          <h4>File:</h4>
           <input
             type="file"
             onChange={this.handleOnChangeFile}
             id="fileId"
             required
           />
-          <SubWrapper>
-            <Button>Submit</Button>
-          </SubWrapper>
+          <SubWrapperBtns>
+            <SubWrapper>
+              <Button>Submit</Button>
+            </SubWrapper>
+          </SubWrapperBtns>
         </form>
         <Button onClick={this.handleCancel}>Cancel</Button>
         <ButtonLink to="/" id="idLinkCancel" style={{ display: 'none' }}>

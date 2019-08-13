@@ -5,7 +5,8 @@ let items = [
     idService: 4,
     idCity: 1,
     title: 'haircut women',
-    description: 'Cut women',
+    description:
+      "Cut women. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
     imgSrc: '/images/women1.jpg',
     cost: 70,
   },
@@ -15,7 +16,8 @@ let items = [
     idService: 6,
     idCity: 1,
     title: 'coloring',
-    description: 'Coloring women, only the roots',
+    description:
+      "Coloring women, only the roots.  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
     imgSrc: '/images/coloring1.jpg',
     cost: 30,
   },

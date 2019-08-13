@@ -34,11 +34,10 @@ class ItemDetails extends Component {
           </div>
           <div>
             <P>${this.props.itemDetails.item.cost}</P>
-            <P>{this.props.itemDetails.item.description}</P>
+            <P>{this.props.itemDetails.item.description.substr(0, 162)}</P>
+            <PDresser>@by {this.props.itemDetails.dresser.name}</PDresser>
           </div>
         </DetailsWrapperDobleCol>
-
-        <PDresser>@by {this.props.itemDetails.dresser.name}</PDresser>
 
         <OrderForm />
       </Wrapper>
