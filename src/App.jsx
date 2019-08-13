@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Redirect,
+  browserHistory,
+} from 'react-router-dom';
 import { connect } from 'react-redux';
 import Navbar from './Navbar.jsx';
 import Home from './Home.jsx';

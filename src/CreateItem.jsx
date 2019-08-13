@@ -9,6 +9,7 @@ import {
   FilterInputPrice,
   FilterWrapperDobleCol,
   Button,
+  ButtonLink,
 } from './components';
 
 import styled from 'styled-components';
@@ -88,17 +89,18 @@ class CreateItem extends Component {
       cost: '',
       file: undefined,
     });
-    document.getElementById('fileId').value = '';
+    //document.getElementById('fileId').value = '';
     let responseBody = await response.text();
     let body = JSON.parse(responseBody);
     if (!body.success) {
       alert('Error: item was not created');
       return;
     }
-    this.props.dispatch({
-      type: 'SHOW_COMPONENT',
-      componentToShow: 'itemDetails',
-    });
+    document.getElementById('idLinkCancel').click();
+    // this.props.dispatch({
+    //   type: 'SHOW_COMPONENT',
+    //   componentToShow: 'itemDetails',
+    // });
   };
   handleOnChange = (ev) => {
     this.setState({ [ev.target.name]: ev.target.value });
@@ -108,10 +110,12 @@ class CreateItem extends Component {
   };
 
   handleCancel = (ev) => {
-    this.props.dispatch({
-      type: 'SHOW_COMPONENT',
-      componentToShow: 'items',
-    });
+    ev.preventDefault();
+    document.getElementById('idLinkCancel').click();
+    // this.props.dispatch({
+    //   type: 'SHOW_COMPONENT',
+    //   componentToShow: 'items',
+    // });
   };
 
   render = () => {
@@ -170,6 +174,9 @@ class CreateItem extends Component {
           </SubWrapper>
         </form>
         <Button onClick={this.handleCancel}>Cancel</Button>
+        <ButtonLink to="/" id="idLinkCancel" style={{ display: 'none' }}>
+          Cancel Link
+        </ButtonLink>
       </Wrapper>
     );
   };
