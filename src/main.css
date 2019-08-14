@@ -1,24 +1,22 @@
 /*http://clrs.cc/*/
 :root {
-  /* Combinations: #000, #fff,#868080*/
-  /* Combinations: #fff, #000,#868080*/
   --bg-primary-color: #fff;
+  --bg-hover-primary-color: #e6dbdb; /*362d2d*/
   --font-primary-color: #000;
-  --font-hover-primary-color: #868080;
+  --font-hover-primary-color: #ee4443;
 
-  /* Combinations: #000, #fff*/
-  /* Combinations: #b10dc9, #fff*/
-  --bg-secondary-color: #000;
-  --font-secondary-color: #fff;
+  --bg-secondary-color: #ee4443;
+  --font-secondary-color: #000;
 
-  /* Combinations: #000, #fff,#000, #333333, black, grey*/
-  /* Combinations: #b10dc9, #fff,#000, #f012be, violeta, fucsia*/
-  /* Combinations: #0074d9, #fff,#000, #7fdbff, blue, celeste*/
-  /* Combinations: gold, #fff,#000, rgb(157, 187, 25), gold, green*/
-  --bg-tertiary-color: #000;
-  --font-tertiary-color: #fff;
-  --font-tertiary-contrast-color: #000;
-  --bg-hover-tertiary-color: #333333;
+  --bg-tertiary-color: black;
+  --font-tertiary-color: #ee4443;
+  --font-tertiary-contrast-color: #fff;
+  --bg-hover-tertiary-color: grey;
+
+  --btn-color: #ee4443;
+  --btn-font-color: #fff;
+  --btn-font-hover-color: #fff;
+  --btn-hover-color: #ee4443;
 
   --links-color: #0074d9;
 

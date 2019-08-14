@@ -17,7 +17,7 @@ import {
   TrEven,
   TFoot,
 } from './components';
-// import { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } from 'constants';
+import { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } from 'constants';
 
 const Wrapper = styled.div`
   overflow: hidden;

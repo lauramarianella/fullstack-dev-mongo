@@ -18,6 +18,7 @@ import {
   TdLeft,
   TrEven,
   TFoot,
+  DivError,
 } from './components';
 
 const Table = styled.table`
@@ -49,11 +50,10 @@ class _CheckouForm extends Component {
       });
       // .then((payload) => {
       //   console.log('[el token]', payload);
-      //   if (payload.error) {
-      //     document.getElementById('idDivError').innerText =
-      //       payload.error.message;
-      //     return;
-      //   }
+      if (payload.error) {
+        document.getElementById('idDivError').innerText = payload.error.message;
+        return;
+      }
       console.log(payload);
       let formData = new FormData();
       formData.append('idToken', payload.token.id);
@@ -140,10 +140,12 @@ class _CheckouForm extends Component {
             />
           </div>
           <CardSection />
-          <div style={{ color: 'red' }} id="idDivError" />
+          <DivError id="idDivError" />
+          <WrapperBtn>
+            <Button>Make payment</Button>
+          </WrapperBtn>
         </form>
         <WrapperBtn>
-          <Button>Make payment</Button>
           <Button onClick={this.handleCancel}>Cancel</Button>
         </WrapperBtn>
       </Wrapper>

@@ -2,16 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { Button, InputSign, FilterTitle } from './components';
-
 const SearchWrapper = styled.div`
-  width: 250px;
-  padding: 30px 20px 0px 20px;
+  width: 70%;
+  padding: 17px 50px 0px 50px;
 `;
-
-const SearchSubWrapper = styled.div`
-  padding: 15px 0px;
-  border-top: 1px solid #999999;
+const InputSearch = styled.input`
+  width: 100%;
+  margin-bottom: 20px;
+  border: 1.5px solid rgb(233, 231, 231);
+  outline: none;
+  height: 30px;
+  font-size: 0.9rem; /*16px*/
+  background: var(--bg-primary-color);
+  color: var(--font-primary-color); /* background: transparent; */
+  border-radius: var(--border-radius-s);
 `;
 
 class Search extends Component {
@@ -54,17 +58,14 @@ class Search extends Component {
   render = () => {
     return (
       <SearchWrapper>
-        <SearchSubWrapper>
-          <form onSubmit={this.handleOnSubmit}>
-            <FilterTitle>Search Item:</FilterTitle>
-            <InputSign
-              type="text"
-              name="itemDescription"
-              onChange={this.handleOnChange}
-            />
-            <Button>Search</Button>
-          </form>
-        </SearchSubWrapper>
+        <form onSubmit={this.handleOnSubmit}>
+          <InputSearch
+            type="text"
+            name="itemDescription"
+            onChange={this.handleOnChange}
+            placeholder="type an style..."
+          />
+        </form>
       </SearchWrapper>
     );
   };

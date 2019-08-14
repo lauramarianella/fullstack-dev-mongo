@@ -39,8 +39,7 @@ export const TdLeft = styled.td`
   ${thTdStyles}
 `;
 export const TrEven = styled.tr`
-  color: var(--font-tertiary-color);
-  background-color: var(--bg-hover-tertiary-color);
+  background-color: lightgray;
 `;
 
 export const TFoot = styled.tfoot`
