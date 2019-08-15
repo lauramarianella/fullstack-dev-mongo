@@ -5,7 +5,7 @@ export const CardWrapper = styled.div`
   overflow: hidden;
   box-shadow: 0px 2px 4px 0px #ddd;
   margin: 20px;
-  border-radius: var(--border-radius-s);
+  border-radius: var(--border-radius-m);
   /* Things I changed */
   width: 160px;
   height: 320px;

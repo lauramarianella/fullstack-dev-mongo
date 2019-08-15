@@ -47,7 +47,7 @@ class Signup extends Component {
       document.getElementById('messageId').innerText = body.message;
       return;
     }
-    this.props.dispatch({ type: 'LOGIN-SUCCESS' });
+    this.props.dispatch({ type: 'LOGIN-SUCCESS', user: this.state.username });
   };
 
   render = () => {

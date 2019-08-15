@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const FiltersWrapper = styled.div`
   width: 250px;
-  padding: 30px 20px;
+  padding: 20px 30px 0px 50px;
 `;
 
 export const FilterWrapper = styled.div`

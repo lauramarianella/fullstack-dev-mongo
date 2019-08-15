@@ -44,7 +44,7 @@ class App extends Component {
       // alert('NO Loged in');
       return;
     }
-    this.props.dispatch({ type: 'LOGIN-SUCCESS' });
+    this.props.dispatch({ type: 'LOGIN-SUCCESS', user: body.user });
   };
 
   renderHome() {

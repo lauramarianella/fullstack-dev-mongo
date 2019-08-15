@@ -7,23 +7,32 @@ import Cities from './Cities.jsx';
 import {
   InputSign,
   FilterInputPrice,
-  FilterWrapperDobleCol,
+  FilterSummaryLabel,
   Button,
   ButtonLink,
 } from './components';
 
 import styled from 'styled-components';
 const Wrapper = styled.div`
-  margin: 0 auto;
-  max-width: 900px;
-  box-sizing: border-box;
-  padding: 0 5px;
-  background: var(--bg-content-color);
+  margin: 50px auto;
+  width: 600px;
+  padding: 30px 30px;
+  background: #fff;
   border: 1px solid var(--border-color);
 `;
+
+const Content = styled.div`
+  background: yellow;
+`;
+
+const Wrapper2Col = styled.div`
+  display: grid;
+  grid-template-columns: auto auto;
+`;
+
 const SubWrapper = styled.div`
-  max-width: 500px;
-  /* border: 1px solid yellow; */
+  padding: 10px;
+  background: green;
 `;
 
 const SubWrapperBtns = styled.div`
@@ -127,64 +136,80 @@ class CreateItem extends Component {
   render = () => {
     return (
       <Wrapper>
-        <form onSubmit={this.handleOnSubmit}>
-          <SubWrapper>
-            <h4>Dresser:</h4>
-            <Dressers />
-          </SubWrapper>
-          <SubWrapper>
-            <h4>Service:</h4>
-            <Services />
-          </SubWrapper>
-          <SubWrapper>
-            <h4>City:</h4>
-            <Cities />
-          </SubWrapper>
-          <h4>title:</h4>
-          <InputSign
-            type="text"
-            name="title"
-            placeholder="Use an appealing title"
-            onChange={this.handleOnChange}
-            required
-          />
-          <h4>Description:</h4>
-          <TextArea
-            name="description"
-            placeholder="Describe the service provided"
-            onChange={this.handleOnChange}
-          />
-          <FilterWrapperDobleCol>
-            <h4>Cost:(CAD)</h4>
-            <FilterSubWrapperPrice>
-              <FilterInputPrice
-                type="text"
-                name="cost"
-                onChange={this.handleOnChange}
-                min="0" // pattern="[0-9]*"
-                step=".01"
-                placeholder="19.99"
-                required
-              />
-            </FilterSubWrapperPrice>
-          </FilterWrapperDobleCol>
-          <h4>File:</h4>
-          <input
-            type="file"
-            onChange={this.handleOnChangeFile}
-            id="fileId"
-            required
-          />
-          <SubWrapperBtns>
-            <SubWrapper>
-              <Button>Submit</Button>
-            </SubWrapper>
-          </SubWrapperBtns>
-        </form>
-        <Button onClick={this.handleCancel}>Cancel</Button>
-        <ButtonLink to="/" id="idLinkCancel" style={{ display: 'none' }}>
-          Cancel Link
-        </ButtonLink>
+        <Content>
+          <form onSubmit={this.handleOnSubmit}>
+            <Wrapper2Col>
+              <SubWrapper>
+                <Dressers />
+              </SubWrapper>
+              <SubWrapper>
+                <Cities />
+              </SubWrapper>
+            </Wrapper2Col>
+
+            <Wrapper2Col>
+              <SubWrapper>
+                <Services />
+              </SubWrapper>
+              <SubWrapper>
+                <>
+                  <FilterSummaryLabel>Title:</FilterSummaryLabel>
+                  <InputSign
+                    type="text"
+                    name="title"
+                    placeholder="Use an appealing title"
+                    onChange={this.handleOnChange}
+                    required
+                  />
+                </>
+              </SubWrapper>
+            </Wrapper2Col>
+
+            <Wrapper2Col>
+              <SubWrapper>
+                <FilterSummaryLabel>Description:</FilterSummaryLabel>
+                <TextArea
+                  name="description"
+                  placeholder="Describe the service provided"
+                  onChange={this.handleOnChange}
+                />
+              </SubWrapper>
+
+              <SubWrapper>
+                <FilterSummaryLabel>Cost:(CAD)</FilterSummaryLabel>
+                <FilterSubWrapperPrice>
+                  <FilterInputPrice
+                    type="text"
+                    name="cost"
+                    onChange={this.handleOnChange}
+                    min="0" // pattern="[0-9]*"
+                    step=".01"
+                    placeholder="19.99"
+                    required
+                  />
+                </FilterSubWrapperPrice>
+              </SubWrapper>
+            </Wrapper2Col>
+
+            <h4>File:</h4>
+            <input
+              type="file"
+              onChange={this.handleOnChangeFile}
+              id="fileId"
+              required
+            />
+            <SubWrapperBtns>
+              <SubWrapper>
+                <Button>Submit</Button>
+              </SubWrapper>
+            </SubWrapperBtns>
+          </form>
+
+          <Button onClick={this.handleCancel}>Cancel</Button>
+          <ButtonLink to="/" id="idLinkCancel" style={{ display: 'none' }}>
+            Cancel Link
+          </ButtonLink>
+        </Content>
       </Wrapper>
     );
   };

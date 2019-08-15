@@ -15,7 +15,7 @@ import {
 const Wrapper = styled.div`
   overflow: hidden;
   box-shadow: 0px 2px 4px 0px #ddd;
-  margin: 20px;
+  margin: 20px 50px 0px 50px;
   border-radius: var(--border-radius-s);
   width: 650px;
   /* height: 100vh; */

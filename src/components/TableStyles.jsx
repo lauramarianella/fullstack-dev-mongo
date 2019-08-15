@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 export const Table = styled.table`
   padding: 10px 0px 0px 50px;
-  margin: 0; /* margin: auto; */
+  margin: auto; /* margin: 0; */
   width: 600px;
   border-collapse: collapse;
   /* border: 1px solid #fff; */

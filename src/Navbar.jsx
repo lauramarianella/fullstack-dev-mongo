@@ -18,6 +18,9 @@ const MiddleBar = styled.div`
 const StatusBar = styled.div`
   height: 50px;
   background: #fff;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0px 40px 0px 30px;
 `;
 
 const WrapperNavBar = styled.div`
@@ -50,6 +53,10 @@ const LogoImg = styled.img`
   width: 90px;
   height: 60px;
 `;
+const AvatarImg = styled.img`
+  width: 50px;
+  height: 50px;
+`;
 
 const NavLinks = styled.div`
   display: flex;
@@ -78,6 +85,7 @@ const NavLink = styled(Link)`
 `;
 
 let Navbar = (props) => {
+  let welcomeMsg = props.user ? `Hi, ${props.user}` : '';
   let navLinksContent = <NavLink to="/login">LOGIN</NavLink>;
   if (props.loggedIn) {
     navLinksContent = (
@@ -103,13 +111,16 @@ let Navbar = (props) => {
         </NavLinks>
       </WrapperNavBar>
       <MiddleBar />
-      <StatusBar />
+      <StatusBar>
+        <AvatarImg src="/images/imgs/avatar.png" />
+        <h3>{welcomeMsg}</h3>
+      </StatusBar>
     </Wrapper>
   );
 };
 
 let mapStateToProps = (state) => {
-  return { loggedIn: state.loggedIn };
+  return { loggedIn: state.loggedIn, user: state.user };
 };
 
 export default connect(mapStateToProps)(Navbar);

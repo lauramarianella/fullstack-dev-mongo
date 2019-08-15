@@ -21,14 +21,14 @@
   --links-color: #0074d9;
 
   /* Combinations:#f2f4f7,#fff*/
-  --bg-content-color: #fff;
+  --bg-content-color: #f2f4f7;
   --bg-content-light-color: #fff;
 
   --border-color: rgb(233, 231, 231); /*rgb(233, 231, 231), #dddddd*/
   --shadow-color: #fff; /*#888888*/
 
-  --border-radius-m: 6px;
-  --border-radius-s: 2px;
+  --border-radius-m: 10px;
+  --border-radius-s: 5px;
 }
 
 * {

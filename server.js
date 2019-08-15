@@ -41,8 +41,9 @@ app.listen(portNumber, () => {
 
 app.get('/alreadyLoggedIn', upload.none(), (req, res) => {
   let sessionId = req.cookies.sid;
-  if (sessions[sessionId]) {
-    res.send(JSON.stringify({ success: true }));
+  let user = sessions[sessionId];
+  if (user) {
+    res.send(JSON.stringify({ success: true, user: user }));
     return;
   }
   res.send(JSON.stringify({ success: false }));
