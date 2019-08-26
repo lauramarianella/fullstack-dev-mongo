@@ -240,7 +240,7 @@ app.post('/item/new', upload.single('filename'), (req, res) => {
   res.send(JSON.stringify({ success: false }));
 });
 
-const stripe = new stripeLoader('hidden Stripe key');
+const stripe = new stripeLoader('hidding Stripe key');
 
 const charge = (token, amt) => {
   return stripe.charges.create({
