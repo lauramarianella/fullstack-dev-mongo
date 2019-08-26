@@ -8,7 +8,7 @@ let items = [
     description:
       "Cut women. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
     imgSrc: '/images/women1.jpg',
-    cost: 70,
+    cost: 45,
   },
   {
     id: 2,
@@ -29,17 +29,7 @@ let items = [
     title: 'haircut men',
     description: 'Cut men, from long to short',
     imgSrc: '/images/men1.jpg',
-    cost: 40,
-  },
-  {
-    id: 4,
-    idDresser: 1,
-    idService: 1,
-    idCity: 1,
-    title: 'haircut men',
-    description: 'Cut men, from long to short',
-    imgSrc: '/images/men3.jpg',
-    cost: 40,
+    cost: 50,
   },
   {
     id: 5,
@@ -103,6 +93,17 @@ let items = [
   },
 
   {
+    id: 4,
+    idDresser: 2,
+    idService: 1,
+    idCity: 1,
+    title: 'haircut men',
+    description: 'Cut men, from long to short',
+    imgSrc: '/images/men3.jpg',
+    cost: 40,
+  },
+
+  {
     id: 11,
     idDresser: 3,
     idService: 6,
@@ -130,7 +131,7 @@ let items = [
     title: 'haircut men',
     description: 'Cut men, from long to short',
     imgSrc: '/images/men2.jpg',
-    cost: 50,
+    cost: 69.99,
   },
   {
     id: 14,
@@ -150,7 +151,7 @@ let items = [
     title: 'Cutting',
     description: 'Dramatic haircut',
     imgSrc: '/images/women2.jpg',
-    cost: 50,
+    cost: 80,
   },
 ];
 
@@ -172,25 +173,40 @@ let dressers = [
 ];
 
 let rates = [
-  { idDresser: 1, idService: 1, g: 20.0, s: 0, m: 0, l: 0 },
-  { idDresser: 1, idService: 4, g: 0, s: 20.0, m: 40.0, l: 60.0 },
-  { idDresser: 1, idService: 3, g: 30.0, s: 0, m: 0, l: 0 },
-  { idDresser: 1, idService: 5, g: 0, s: 30.0, m: 60.0, l: 90.0 },
-  { idDresser: 1, idService: 6, g: 0, s: 50.0, m: 90.0, l: 110.99 },
-  { idDresser: 1, idService: 7, g: 0, s: 50.0, m: 70.0, l: 120 },
+  { idDresser: 1, idService: 1, g: 40.0, s: 0, m: 0, l: 0 },
+  { idDresser: 2, idService: 1, g: 40.0, s: 0, m: 0, l: 0 },
+  { idDresser: 3, idService: 1, g: 50.0, s: 0, m: 0, l: 0 },
+  { idDresser: 4, idService: 1, g: 50.0, s: 0, m: 0, l: 0 },
 
-  { idDresser: 2, idService: 4, g: 0, s: 20, m: 40, l: 60 },
-  { idDresser: 2, idService: 3, g: 30, s: 0, m: 0, l: 0 },
-  { idDresser: 2, idService: 5, g: 0, s: 30, m: 60, l: 90 },
-  { idDresser: 2, idService: 6, g: 0, s: 50, m: 90, l: 110 },
-  { idDresser: 2, idService: 7, g: 0, s: 50.0, m: 70.0, l: 120 },
+  { idDresser: 1, idService: 2, g: 25.0, s: 0, m: 0, l: 0 },
+  { idDresser: 2, idService: 2, g: 20.0, s: 0, m: 0, l: 0 },
+  { idDresser: 3, idService: 2, g: 30.0, s: 0, m: 0, l: 0 },
+  { idDresser: 4, idService: 2, g: 35.0, s: 0, m: 0, l: 0 },
 
-  { idDresser: 3, idService: 1, g: 20, s: 0, m: 0, l: 0 },
-  { idDresser: 3, idService: 4, g: 0, s: 20, m: 40, l: 60 },
+  { idDresser: 1, idService: 3, g: 40, s: 0, m: 0, l: 0 },
+  { idDresser: 2, idService: 3, g: 0, s: 20, m: 30, l: 40 },
   { idDresser: 3, idService: 3, g: 30, s: 0, m: 0, l: 0 },
+  { idDresser: 4, idService: 3, g: 50, s: 0, m: 0, l: 0 },
+
+  { idDresser: 1, idService: 4, g: 0, s: 20.0, m: 40.0, l: 60.0 },
+  { idDresser: 2, idService: 4, g: 0, s: 20, m: 40, l: 60 },
+  { idDresser: 3, idService: 4, g: 0, s: 20, m: 40, l: 60 },
+  { idDresser: 4, idService: 4, g: 0, s: 19.99, m: 39.99, l: 59.99 },
+
+  { idDresser: 1, idService: 5, g: 0, s: 30.0, m: 60.0, l: 90.0 },
+  { idDresser: 2, idService: 5, g: 0, s: 30, m: 60, l: 90 },
   { idDresser: 3, idService: 5, g: 0, s: 30, m: 60, l: 90 },
+  { idDresser: 4, idService: 5, g: 100, s: 0, m: 0, l: 0 },
+
+  { idDresser: 1, idService: 6, g: 0, s: 50.0, m: 90.0, l: 110.99 },
+  { idDresser: 2, idService: 6, g: 0, s: 50, m: 90, l: 110 },
   { idDresser: 3, idService: 6, g: 0, s: 50, m: 90, l: 110 },
+  { idDresser: 4, idService: 6, g: 0, s: 50, m: 90, l: 110 },
+
+  { idDresser: 1, idService: 7, g: 80, s: 0, m: 0, l: 0 },
+  { idDresser: 2, idService: 7, g: 85, s: 0, m: 0, l: 0 },
   { idDresser: 3, idService: 7, g: 0, s: 50.0, m: 70.0, l: 120 },
+  { idDresser: 4, idService: 7, g: 85, s: 0, m: 0, l: 0 },
 ];
 
 let cities = [

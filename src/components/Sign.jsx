@@ -26,10 +26,9 @@ export const TitleSign = styled.p`
 export const InputSign = styled.input`
   width: 100%;
   margin-bottom: 20px;
-  border: 1.5px solid rgb(233, 231, 231);
+  border: 1px solid var(--border-color);
   background: transparent;
-  outline: none;
-  height: 30px;
+  height: 28px;
   font-size: 0.9rem; /*16px*/
 `;
 

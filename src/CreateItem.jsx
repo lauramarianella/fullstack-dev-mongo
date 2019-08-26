@@ -5,7 +5,6 @@ import Dressers from './Dressers.jsx';
 import Cities from './Cities.jsx';
 
 import {
-  InputSign,
   FilterInputPrice,
   FilterSummaryLabel,
   Button,
@@ -16,14 +15,12 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   margin: 50px auto;
   width: 600px;
-  padding: 30px 30px;
-  background: #fff;
+  padding: 30px;
+  background: var(--bg-content-light-color);
   border: 1px solid var(--border-color);
 `;
 
-const Content = styled.div`
-  background: yellow;
-`;
+const Content = styled.div``;
 
 const Wrapper2Col = styled.div`
   display: grid;
@@ -32,13 +29,13 @@ const Wrapper2Col = styled.div`
 
 const SubWrapper = styled.div`
   padding: 10px;
-  background: green;
+  width: 250px;
 `;
 
-const SubWrapperBtns = styled.div`
-  padding: 15px 0px;
-  max-width: 500px;
-  /* border: 1px solid red; */
+const WrapperBtn = styled.div`
+  margin: auto;
+  /* padding-top: 20px; */
+  max-width: 300px;
 `;
 
 const TextArea = styled.textarea`
@@ -58,6 +55,17 @@ const FilterSubWrapperPrice = styled.div`
   width: 30%;
   box-sizing: border-box;
   padding-right: 10px;
+`;
+
+const InputSign = styled.input`
+  font-family: Genath-Regular, serif;
+  font-size: 16px;
+  /* line-height: 50px; */
+  background: transparent;
+  letter-spacing: 0;
+  width: 100%;
+  height: 28px;
+  border: 1px solid var(--border-color); /*#dddddd*/
 `;
 
 class CreateItem extends Component {
@@ -191,21 +199,21 @@ class CreateItem extends Component {
               </SubWrapper>
             </Wrapper2Col>
 
-            <h4>File:</h4>
+            <FilterSummaryLabel>File:</FilterSummaryLabel>
             <input
               type="file"
               onChange={this.handleOnChangeFile}
               id="fileId"
               required
             />
-            <SubWrapperBtns>
-              <SubWrapper>
-                <Button>Submit</Button>
-              </SubWrapper>
-            </SubWrapperBtns>
+            <WrapperBtn>
+              <Button>Submit</Button>
+            </WrapperBtn>
           </form>
 
-          <Button onClick={this.handleCancel}>Cancel</Button>
+          <WrapperBtn>
+            <Button onClick={this.handleCancel}>Cancel</Button>
+          </WrapperBtn>
           <ButtonLink to="/" id="idLinkCancel" style={{ display: 'none' }}>
             Cancel Link
           </ButtonLink>

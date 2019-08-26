@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Dialog from './Dialog';
 
 import { TAX_ARRAY } from './globals.js';
 
@@ -17,7 +18,6 @@ import {
   TrEven,
   TFoot,
 } from './components';
-import { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } from 'constants';
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -42,6 +42,8 @@ class OrderForm extends Component {
     let taxesArray = TAX_ARRAY;
     taxesArray.forEach((tx) => (tx.totalTax = 0.0));
     this.state = {
+      myOpen: false,
+
       order: initialOrder, //{idService, service, idDresser, idPriceType(g,s,m,l), price}
       subTotal: 0.0,
       // taxesArray: [
@@ -55,26 +57,33 @@ class OrderForm extends Component {
 
   handleOnSubmit = (ev, total) => {
     ev.preventDefault();
+    this.setState({ open: true });
+
     if (!total) {
       document.getElementById('idDivError').innerText =
         'Please, select a service and choose the price according to your hair lenght!!!';
       return;
     }
-
-    if (confirm('Are you sure you want to proceed to the payment!!')) {
-      this.props.dispatch({
-        type: 'PAYMENT',
-        order: {
-          order: this.state.order,
-          subTotal: this.state.subTotal,
-          taxesArray: this.state.taxesArray,
-          total: this.state.total,
-          dresser: this.props.itemDetails.dresser,
-        },
-      });
-    }
+    // let dialogoBtn = document.getElementById('idHiddenBtn');
+    // dialogoBtn.click();
+    // if (confirm('Are you sure you want to proceed to the payment!!')) {
+    //   this.submitForm();
+    // }
     return;
   };
+
+  submitForm() {
+    this.props.dispatch({
+      type: 'PAYMENT',
+      order: {
+        order: this.state.order,
+        subTotal: this.state.subTotal,
+        taxesArray: this.state.taxesArray,
+        total: this.state.total,
+        dresser: this.props.itemDetails.dresser,
+      },
+    });
+  }
 
   roundOff(quantity, decimals = 2) {
     return quantity.toFixed(decimals);
@@ -238,6 +247,8 @@ class OrderForm extends Component {
     return (
       <>
         <div>
+          <Dialog state={this.state} myFunction={this.submitForm} p={this} />
+
           <form>
             <Table>
               <Caption>{this.props.itemDetails.dresser.name}'s rates</Caption>

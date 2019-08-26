@@ -21,7 +21,7 @@ let cities = data.cities;
 
 let query = require('./query.js');
 
-let passwords = { Laura: 'Rabah' };
+let passwords = { Laura: 'Rabah', Fedorita: 'Fedorita' };
 let sessions = {};
 
 app.use('/', express.static('build'));

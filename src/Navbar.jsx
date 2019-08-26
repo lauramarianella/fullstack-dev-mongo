@@ -85,7 +85,15 @@ const NavLink = styled(Link)`
 `;
 
 let Navbar = (props) => {
-  let welcomeMsg = props.user ? `Hi, ${props.user}` : '';
+  let welcomeMsg = props.user ? (
+    <>
+      <AvatarImg src="/images/imgs/avatar.png" />
+      <h3> Hi, {props.user}</h3>
+    </>
+  ) : (
+    ''
+  );
+
   let navLinksContent = <NavLink to="/login">LOGIN</NavLink>;
   if (props.loggedIn) {
     navLinksContent = (
@@ -111,10 +119,7 @@ let Navbar = (props) => {
         </NavLinks>
       </WrapperNavBar>
       <MiddleBar />
-      <StatusBar>
-        <AvatarImg src="/images/imgs/avatar.png" />
-        <h3>{welcomeMsg}</h3>
-      </StatusBar>
+      <StatusBar>{welcomeMsg}</StatusBar>
     </Wrapper>
   );
 };

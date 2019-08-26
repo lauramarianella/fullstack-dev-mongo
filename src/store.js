@@ -1,11 +1,19 @@
 import { createStore } from 'redux';
 
+let initialState = {
+  loggedIn: false,
+  user: '',
+  componentToShow: 'items',
+  listItems: [],
+  itemDetails: { item: {}, dresser: {}, dresserServices: [] },
+};
+
 let reducer = (state, action) => {
   if (action.type === 'LOGIN-SUCCESS') {
     return { ...state, loggedIn: true, user: action.user };
   }
   if (action.type === 'LOGOUT-SUCCESS') {
-    return { ...state, loggedIn: false };
+    return initialState;
   }
 
   if (action.type === 'SET-LIST-ITEMS') {
@@ -46,13 +54,6 @@ let reducer = (state, action) => {
   }
 
   return state;
-};
-
-let initialState = {
-  loggedIn: false,
-  componentToShow: 'items',
-  listItems: [],
-  itemDetails: { item: {}, dresser: {}, dresserServices: [] },
 };
 
 const store = createStore(

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { FilterSummaryLabel, FilterSelect } from './components';
 
 class Services extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = { idService: '', services: [] };
   }
 

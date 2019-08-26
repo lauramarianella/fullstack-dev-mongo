@@ -9,7 +9,6 @@ import CardSection from './CardSection';
 import styled from 'styled-components';
 import {
   Button,
-  WrapperBtn,
   InputSign,
   Caption,
   Th,
@@ -32,6 +31,11 @@ const Wrapper = styled.div`
   background: var(--bg-content-color);
 `;
 
+const WrapperBtn = styled.div`
+  margin: auto;
+  /* padding-top: 20px; */
+  max-width: 300px;
+`;
 class _CheckouForm extends Component {
   constructor(props) {
     super(props);
@@ -71,7 +75,7 @@ class _CheckouForm extends Component {
         return;
       }
       alert('Thank you for your payment ' + this.state.name);
-      this.handleOnCancel(null);
+      this.handleCancel(null);
 
       // });
     } else {

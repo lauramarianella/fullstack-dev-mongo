@@ -7,6 +7,7 @@ class CardSection extends React.Component {
       <label>
         <h3>Card details</h3>
         <CardElement style={{ base: { fontSize: '18px' } }} />
+        <br />
       </label>
     );
   }
