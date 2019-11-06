@@ -12,6 +12,15 @@ reloadMagic(app);
 
 let stripeLoader = require('stripe');
 
+let mongoose = require('mongoose');
+require('dotenv/config');
+const postsRoute = require('./routes/posts.js');
+app.use('/posts', postsRoute);
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+const cors = require('cors');
+app.use(cors());
+
 let data = require('./dataAllure.js');
 let items = data.items;
 let services = data.services;
@@ -38,6 +47,19 @@ let portNumber = 3000;
 app.listen(portNumber, () => {
   console.log('Server started in port ' + portNumber);
 });
+
+//connect to DB
+mongoose.connect(
+  process.env.DB_CONNECTION,
+  { useNewUrlParser: true },
+  (err, client) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log('Connected to DB!!');
+  }
+);
 
 app.get('/alreadyLoggedIn', upload.none(), (req, res) => {
   let sessionId = req.cookies.sid;
@@ -240,7 +262,7 @@ app.post('/item/new', upload.single('filename'), (req, res) => {
   res.send(JSON.stringify({ success: false }));
 });
 
-const stripe = new stripeLoader('1233uwe7gg@@@');
+const stripe = new stripeLoader('sk_test_e8Lw2Xu3GxSclAsefU1wYtEx00GPd1EvtM');
 
 const charge = (token, amt) => {
   return stripe.charges.create({
