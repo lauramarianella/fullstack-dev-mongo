@@ -9,3 +9,4 @@
 ## Stripe
 
 When cloning this project, you must change Stripe keys to test the payment.
+"description" 
